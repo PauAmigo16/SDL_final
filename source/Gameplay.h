@@ -1,6 +1,5 @@
 #pragma once
 #include "Scene.h"
-#include "HighScoreManager.h"
 #include"Spawner.h"
 #include"Frog.h"
 #include "LevelLoader.h"

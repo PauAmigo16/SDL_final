@@ -2,22 +2,22 @@
 
 AnimatedImageRenderer::AnimatedImageRenderer()
 {
-	stopUpdate = false;
+	animationFinished = false;
 
 }
 
 AnimatedImageRenderer::AnimatedImageRenderer(SDL_Color color, float alpha, float rotation, SDL_Rect targetRect, SDL_Rect sourceRect, int frameWidth, int frameHeight, int fps, bool looping): ImageRenderer(color,alpha, rotation,targetRect,sourceRect)
 {
-	stopUpdate = false;
+	animationFinished = false;
 
 }
 
 
 void AnimatedImageRenderer::Update()
 {
-	if (!stopUpdate) 
+	if (!animationFinished) 
 	{
-		currentFrameTime += TM->GetDeltaTime();
+		currentFrameTime += TM->GetDT();
 
 		currentFrame = currentFrameTime / (1/fps);
 
@@ -26,7 +26,7 @@ void AnimatedImageRenderer::Update()
 		if (currentFrame == frames - 1 && !looping)
 		{
 			currentFrameTime = 0;
-			stopUpdate = true;
+			animationFinished = true;
 		}
 	
 		sourceRect = images[currentAnimationFrame];
@@ -55,7 +55,7 @@ void AnimatedImageRenderer::SetImage(SDL_Rect image)
 void AnimatedImageRenderer::ActiveAnimation()
 {
 	currentFrame = TM->GetFrameIncrement();
-	stopUpdate = false;
+	animationFinished = false;
 
 }
 

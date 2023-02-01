@@ -16,16 +16,19 @@ Renderer::Renderer(SDL_Color color, float alpha, float rotation, SDL_Rect target
 
 }
 
+Renderer::~Renderer()
+{
+	SDL_DestroyTexture(texture);
+}
+
 void Renderer::SetColor(SDL_Color color)
 {
 	this->color = color;
-
 }
 
 void Renderer::SetAlpha(float alpha)
 {
 	this->alpha = alpha;
-
 }
 
 void Renderer::SetPosition(Vector2 position)
@@ -35,8 +38,6 @@ void Renderer::SetPosition(Vector2 position)
 
 	this->targetRect.x = position.x;
 	this->targetRect.y = position.y;
-
-
 }
 
 void Renderer::SetScale(Vector2 scale)
@@ -54,7 +55,17 @@ void Renderer::SetScale(int w, int h)
 void Renderer::SetRotation(float rotation)
 {
 	this->rotation = rotation;
+}
 
+void Renderer::SetVelocity(Vector2 v)
+{
+	velocity.x = (v.x);
+	velocity.y = (v.y);
+}
+
+void Renderer::SetTexture(SDL_Texture* texture)
+{
+	this->texture = texture;
 }
 
 SDL_Color Renderer::GetColor()
@@ -67,23 +78,7 @@ float Renderer::GetAlpha()
 	return alpha;
 }
 
-void Renderer::SetVelocity(Vector2 v)
-{
-	velocity.x = (v.x);
-	velocity.y = (v.y);
-
-}
-
 SDL_Texture* Renderer::GetTexture()
 {
 	return texture;
-}
-
-void Renderer::SetTexture(SDL_Texture* texture)
-{
-	this->texture = texture;
-}
-
-Renderer::~Renderer()
-{
 }

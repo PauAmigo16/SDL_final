@@ -20,7 +20,7 @@ public:
 	static TimeManager* GetInstance();
 	void Update();
 	float GetCurrentTime();
-	float GetDeltaTime();
+	float GetDT();
 	int GetFrameIncrement();
 	void PauseGame(bool pause);
 	bool GameState();

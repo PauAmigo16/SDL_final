@@ -16,7 +16,7 @@ SplashScreen::SplashScreen()
 	animation->SetImage({ 16,0,16,16 });
 	animation->SetImage({ 0,0,16,16 });
 	animation->SetImage({ 32,0,16,16 });
-	animation->SetVelocity({ (float)( - 9.333 * RM->gridX * TM->GetDeltaTime()),0});
+	animation->SetVelocity({ (float)( - 9.333 * RM->gridX * TM->GetDT()),0});
 	animaciones.push_back(animation);
 
 	title[i] = new ImageRenderer;
@@ -26,7 +26,7 @@ SplashScreen::SplashScreen()
 	title[i]->SetScale((int)RM->gridX*2, (int)RM->gridY*2);
 
 	title[i]->SetRotation(-90);
-	title[i]->SetVelocity({ (float)(-9.333 * RM->gridX * TM->GetDeltaTime()),0 });
+	title[i]->SetVelocity({ (float)(-9.333 * RM->gridX * TM->GetDT()),0 });
 	this->title.push_back(title[i]);
 
 	}

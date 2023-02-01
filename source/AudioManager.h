@@ -9,25 +9,22 @@
 class AudioManager
 {
 private:
-	std::unordered_map<std::string, Mix_Chunk*> sfx;
+	std::unordered_map<std::string, Mix_Chunk*> clips;
 	std::unordered_map<std::string, Mix_Music*> music;
 
-	bool isMuted;
+	bool muted;
 
 	static AudioManager* instance;
+
 	AudioManager();
-	AudioManager(const AudioManager&) = delete;
-	AudioManager& operator=(const AudioManager&) = delete;
+
 public:
 	static AudioManager* GetInstance();
 
-	void LoadSFX(std::string audioName);
-	void UnLoadSFX(std::string audioName);
+	void LoadClip(std::string audioName);
+	void PlayClip(std::string audioName, int times);
 
 	void LoadMusic(std::string audioName);
-	void UnLoadMusic(std::string audioName);
-
-	void PlaySFX(std::string audioName, int repeticions);
 	void PlayMusic(std::string audioName);
 
 	void StopAudios();

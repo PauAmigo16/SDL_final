@@ -45,7 +45,7 @@ float TimeManager::GetCurrentTime()
     return Time;
 }
 
-float TimeManager::GetDeltaTime()
+float TimeManager::GetDT()
 {
 		return TICK;
 

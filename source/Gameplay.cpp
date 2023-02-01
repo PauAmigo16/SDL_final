@@ -232,9 +232,9 @@ void Gameplay::Update()
 							else if (endPositions[i]->addFly)
 							{
 								if (endPosition != 1)
-									AM->PlaySFX("ReachEnd", 0);
+									AM->PlayClip("ReachEnd", 0);
 								else
-									AM->PlaySFX("EndLevel", 0);
+									AM->PlayClip("EndLevel", 0);
 
 								dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(dynamic_cast<TimeBar*>(gameUI.find("timeBar")->second)->GetPerc()*2);
 
@@ -281,9 +281,9 @@ void Gameplay::Update()
 								reachEndTime = TM->GetCurrentTimeInPause();
 
 								if (endPosition != 1)
-									AM->PlaySFX("ReachEnd", 0);
+									AM->PlayClip("ReachEnd", 0);
 								else
-									AM->PlaySFX("EndLevel", 0);
+									AM->PlayClip("EndLevel", 0);
 							}
 						}
 					}
@@ -380,7 +380,7 @@ void Gameplay::Update()
 
 				if (dynamic_cast<Lives*>(gameUI.find("lives")->second)->GetLives() == -1)
 				{
-					AM->PlaySFX("LostAllLives", 0);
+					AM->PlayClip("LostAllLives", 0);
 
 					death = true;
 					return;
@@ -388,9 +388,9 @@ void Gameplay::Update()
 				else
 				{
 					if(isWater)
-						AM->PlaySFX("Water", 0);
+						AM->PlayClip("Water", 0);
 					else
-						AM->PlaySFX("Dead", 0);
+						AM->PlayClip("Dead", 0);
 				}
 			}
 		}

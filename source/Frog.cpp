@@ -94,11 +94,11 @@ void Frog::Update()
 			{
 				if (IM->CheckKeyState(SDLK_LEFT, PRESSED))
 				{
-					AM->PlaySFX("Jump", 0);
+					AM->PlayClip("Jump", 0);
 
 					movementTime = TM->GetCurrentTime();
 					moving = true;
-					move = { -4 * TM->GetDeltaTime() * RM->gridX,0 };
+					move = { -4 * TM->GetDT() * RM->gridX,0 };
 			
 						foodAnimation.SetRotation(-90);
 						foodAnimation.ActiveAnimation();
@@ -111,11 +111,11 @@ void Frog::Update()
 				}
 				else if (IM->CheckKeyState(SDLK_RIGHT, PRESSED))
 				{
-					AM->PlaySFX("Jump", 0);
+					AM->PlayClip("Jump", 0);
 
 					movementTime = TM->GetCurrentTime();
 					moving = true;
-					move = { 4 * TM->GetDeltaTime() * RM->gridX,0 };
+					move = { 4 * TM->GetDT() * RM->gridX,0 };
 			
 						foodAnimation.SetRotation(90);
 						foodAnimation.ActiveAnimation();
@@ -128,11 +128,11 @@ void Frog::Update()
 				}
 				else if (IM->CheckKeyState(SDLK_UP, PRESSED))
 				{
-					AM->PlaySFX("Jump", 0);
+					AM->PlayClip("Jump", 0);
 
 					movementTime = TM->GetCurrentTime();
 					moving = true;
-					move = { 0,-4 * TM->GetDeltaTime() * RM->gridY };
+					move = { 0,-4 * TM->GetDT() * RM->gridY };
 				
 						foodAnimation.SetRotation(0);
 						foodAnimation.ActiveAnimation();
@@ -148,11 +148,11 @@ void Frog::Update()
 				}
 				else if (IM->CheckKeyState(SDLK_DOWN, PRESSED))
 				{
-					AM->PlaySFX("Jump", 0);
+					AM->PlayClip("Jump", 0);
 
 					movementTime = TM->GetCurrentTime();
 					moving = true;
-					move = { 0,4 * TM->GetDeltaTime() * RM->gridY };
+					move = { 0,4 * TM->GetDT() * RM->gridY };
 				
 						foodAnimation.SetRotation(180);
 						foodAnimation.ActiveAnimation();

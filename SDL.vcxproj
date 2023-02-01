@@ -51,7 +51,6 @@
     <ClCompile Include="source\SceneManager.cpp" />
     <ClCompile Include="source\Spawner.cpp" />
     <ClCompile Include="source\SplashScreen.cpp" />
-    <ClCompile Include="source\TextObject.cpp" />
     <ClCompile Include="source\TextRenderer.cpp" />
     <ClCompile Include="source\TimeManager.cpp" />
     <ClCompile Include="source\Transform.cpp" />
@@ -76,7 +75,6 @@
     <ClInclude Include="source\AABB.h" />
     <ClInclude Include="source\AnimatedImageRenderer.h" />
     <ClInclude Include="source\AudioManager.h" />
-    <ClInclude Include="source\Button.h" />
     <ClInclude Include="source\Food.h" />
     <ClInclude Include="source\Frog.h" />
     <ClInclude Include="source\GameEngine.h" />
@@ -95,7 +93,6 @@
     <ClInclude Include="source\SceneManager.h" />
     <ClInclude Include="source\Spawner.h" />
     <ClInclude Include="source\SplashScreen.h" />
-    <ClInclude Include="source\TextObject.h" />
     <ClInclude Include="source\TextRenderer.h" />
     <ClInclude Include="source\TimeManager.h" />
     <ClInclude Include="source\Transform.h" />

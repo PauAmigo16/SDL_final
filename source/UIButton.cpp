@@ -82,7 +82,7 @@ void UIButton::ComproveCollision(Vector2 point)
 		if (IM->mousePressed)
 		{
 			isClicked = true;
-			AM->PlaySFX("Jump",0);
+			AM->PlayClip("Jump",0);
 		}
 		else
 		{

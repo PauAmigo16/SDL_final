@@ -2,8 +2,8 @@
 
 Log::Log(int lenght, Vector2 velocity, Vector2 startPosition)
 {
-	this->velocity.x = (velocity.x * TM->GetDeltaTime());
-	this->velocity.y = (velocity.y * TM->GetDeltaTime());
+	this->velocity.x = (velocity.x * TM->GetDT());
+	this->velocity.y = (velocity.y * TM->GetDT());
 	getDamage = false;
 	SetTransform(startPosition.x, startPosition.y, RM->gridX *lenght, RM->gridY, 0);
 	for (int i = 0; i < lenght; i++)

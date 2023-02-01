@@ -3,13 +3,13 @@
 
 Snake::Snake(float leftLimit, float logSize, float moveVelocity, Vector2 velocity, Vector2 startPosition)
 {
-	this->velocity.x = (velocity.x * TM->GetDeltaTime());
-	this->velocity.y = (velocity.y * TM->GetDeltaTime());
+	this->velocity.x = (velocity.x * TM->GetDT());
+	this->velocity.y = (velocity.y * TM->GetDT());
 
 	this->leftLimit = leftLimit;
 	this->rightLimit = logSize;
 
-	this->moveVelocity = (moveVelocity * TM->GetDeltaTime()* RM->gridX);
+	this->moveVelocity = (moveVelocity * TM->GetDT()* RM->gridX);
 
 
 	getDamage = true;
