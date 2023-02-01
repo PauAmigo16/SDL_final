@@ -43,10 +43,7 @@ void MainMenu::Update()
 	}
 	else if (buttons.find("ranking")->second->Pressed)
 	{
-		SM->SetScene("ranking");
-
-
-		buttons.find("ranking")->second->Pressed = false;
+		//TODO set scene to ranking
 	}
 	else if (buttons.find("audio")->second->Pressed)
 	{

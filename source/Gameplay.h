@@ -11,7 +11,6 @@
 #include "Lives.h"
 #include "UIPanel.h"
 #include "SceneManager.h"
-#include "Ranking.h"
 
 #include<vector>
 #include<map>

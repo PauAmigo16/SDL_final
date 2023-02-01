@@ -4,7 +4,6 @@
 #include "SplashScreen.h"
 #include "MainMenu.h"
 #include "Gameplay.h"
-#include "Ranking.h"
 #include "RenderManager.h"
 #include "TimeManager.h"
 

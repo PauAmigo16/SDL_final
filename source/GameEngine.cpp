@@ -18,15 +18,14 @@ void GameEngine::Init() {
 	Gameplay* gameplay = new Gameplay();
 	SplashScreen* splashScreen = new SplashScreen();
 	MainMenu* mainMenu = new MainMenu();
-	Ranking* ranking = new Ranking();
 
 	
 	SM->AddScene("Gameplay", gameplay);
 	SM->AddScene("splashScreen", splashScreen);
 	SM->AddScene("mainMenu", mainMenu);
-	SM->AddScene("ranking", ranking);
+	//TODO add ranking
+	//SM->AddScene("ranking", );
 
-	
 	SM->SetScene("splashScreen");
 }
 
@@ -45,8 +44,7 @@ void GameEngine::InitSDL() {
 #pragma endregion INITIALIZATION
 
 void GameEngine::Quit() {
-	//Para guardar la puntuacion en caso de cerrar el juego en medio del gameplay
-	dynamic_cast<Ranking*>(SM->GetScene("ranking"))->SetNewScore(dynamic_cast<Score*>(dynamic_cast<Gameplay*>(SM->GetScene("Gameplay"))->gameUI.find("score")->second)->GetScore());
+	//TODO save score
 
 	RM->Quit();
 }
@@ -61,8 +59,6 @@ void GameEngine::Run() {
 
 		TM->Update();
 
-
-
 		if (TM->GetFrameIncrement() > lastFrame)
 		{		
 
@@ -72,18 +68,7 @@ void GameEngine::Run() {
 		lastFrame = TM->GetFrameIncrement();
 		}			
 
-		//Update();
-
-
-
-
-
-		//Render();
 		Render();
-
-		
-
-
 	}
 }
 
@@ -96,5 +81,4 @@ void GameEngine::Render()
 	SDL_RenderPresent(RM->GetRenderer());
 
 	RM->RenderScreen();
-
 }

@@ -403,7 +403,6 @@ void Gameplay::Update()
 		if (dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->ComproveIfButtonPresed("restart"))
 		{
 			TM->PauseGame(false);
-			dynamic_cast<Ranking*>(SM->GetScene("ranking"))->SetNewScore(dynamic_cast<Score*>(gameUI.find("score")->second)->GetScore());
 			states = States::GAMEPLAY;
 			dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->StopPress();
 		}
@@ -413,7 +412,6 @@ void Gameplay::Update()
 
 			player->returnGame();
 			TM->PauseGame(false);
-			dynamic_cast<Ranking*>(SM->GetScene("ranking"))->SetNewScore(dynamic_cast<Score*>(gameUI.find("score")->second)->GetScore());
 
 			SM->SetScene("mainMenu");
 			states = States::GAMEPLAY;
@@ -442,8 +440,6 @@ void Gameplay::Update()
 		}
 		else
 		{
-			dynamic_cast<Ranking*>(SM->GetScene("ranking"))->SetNewScore(dynamic_cast<Score*>(gameUI.find("score")->second)->GetScore());
-
 			dynamic_cast<UIPanel*>(gameUI.find("gameOver")->second)->ComproveButtonCol({ (float)IM->GetMouseX(),(float)IM->GetMouseY() });
 
 			if (dynamic_cast<UIPanel*>(gameUI.find("gameOver")->second)->ComproveIfButtonPresed("returnGame"))
@@ -477,10 +473,6 @@ void Gameplay::Update()
 	case Gameplay::REACHEND:
 		player->UpdateScore();
 
-
-
-
-
 		if (reachEndTime + 2 < TM->GetCurrentTimeInPause())
 		{
 			if(endPosition != 0)
@@ -507,25 +499,16 @@ void Gameplay::Update()
 		break;
 	}
 
-
-
-
-
-
-
-
-
-
-
 }
 
 void Gameplay::Render()
 {
-	for (auto tile : tiles) {
-
+	for (auto tile : tiles) 
+	{
 		tile->Render();
 	}
-	for (auto object : objects) {
+	for (auto object : objects) 
+	{
 		if(object != nullptr)
 		object->Render();
 	}
@@ -567,18 +550,14 @@ void Gameplay::Render()
 	default:
 		break;
 	}
-
-
-
-
-
 }
 
 void Gameplay::OnEnter()
 {
 	AM->PlayMusic("GameplayMusic");
 
-	text->SetText("Max Score " + std::to_string(dynamic_cast<Ranking*>(SM->GetScene("ranking"))->GetMaxScore()));
+	//TODO put max score here so it prints
+	text->SetText("Max Score: " );
 
 	if (level == 1)
 	{
@@ -595,7 +574,6 @@ void Gameplay::OnEnter()
 
 		player->returnGame();
 		TM->PauseGame(false);
-		dynamic_cast<Ranking*>(SM->GetScene("ranking"))->SetNewScore(dynamic_cast<Score*>(gameUI.find("score")->second)->GetScore());
 
 		SM->SetScene("mainMenu");
 		states = States::GAMEPLAY;
@@ -604,9 +582,7 @@ void Gameplay::OnEnter()
 
 		dynamic_cast<Lives*>(gameUI.find("lives")->second)->SetLives(3);
 		dynamic_cast<Score*>(gameUI.find("score")->second)->SetScore(0);
-
 	}
-
 
 	restartTime();
 }
@@ -664,5 +640,4 @@ void Gameplay::RestartLevel()
 	{
 		end->frog = false;
 	}
-
 }
