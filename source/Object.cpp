@@ -46,7 +46,7 @@ Object::~Object()
 {
 }
 
-bool Object::GetFood()
+bool Object::IsFood()
 {
     return false;
 }

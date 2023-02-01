@@ -102,7 +102,7 @@ void Food::SetPosition(Vector2 p)
 	animation->SetPosition(p);
 }
 
-bool Food::GetFood()
+bool Food::IsFood()
 {
 	return true;
 }

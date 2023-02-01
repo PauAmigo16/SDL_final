@@ -17,7 +17,7 @@ private:
 
 	//------ SDL
 	SDL_Window* window;
-	SDL_Renderer* renderer;
+	SDL_Renderer* renderers;
 
 	int windowWidth;
 	int windowHeight;
@@ -26,6 +26,7 @@ private:
 	//There's an errror trying to create the window on here...
 	//void InitWindowAndRenderer(int width, int height);
 	
+	int lastFR;
 
 	//----- RENDER
 	int RandomNum();

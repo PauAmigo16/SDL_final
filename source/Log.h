@@ -11,7 +11,7 @@ public:
 	virtual void Render() override;
 	void SetObject(Object* object);
 	virtual ~Log() override;
-	virtual bool GetFood() override;
+	virtual bool IsFood() override;
 	void SetFood();
 	virtual Object* GetObject();
 	virtual void deleteFood() override;

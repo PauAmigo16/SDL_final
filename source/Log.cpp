@@ -21,7 +21,7 @@ Log::Log(int lenght, Vector2 velocity, Vector2 startPosition)
 	image->SetPosition({ (transform.GetPosition().x + (RM->gridX * i)), transform.GetPosition().y });
 	image->SetScale( transform.GetScale().x/lenght , transform.GetScale().y);
 	image->SetVelocity(this->velocity);
-	renderer.push_back(image);
+	renderers.push_back(image);
 	}
 	food = false;
 	object = nullptr;
@@ -34,7 +34,7 @@ void Log::Update()
 		object->Update();
 	}
 	SetPosition({ transform.GetPosition().x + (velocity.x), transform.GetPosition().y + (velocity.y) });
-	for (auto render : renderer)
+	for (auto render : renderers)
 	{
 		render->Update();
 	}
@@ -42,7 +42,7 @@ void Log::Update()
 
 void Log::Render()
 {
-	for (auto render : renderer)
+	for (auto render : renderers)
 	{
 		render->Render();
 	}
@@ -67,7 +67,7 @@ Log::~Log()
 	}
 }
 
-bool Log::GetFood()
+bool Log::IsFood()
 {
 	return food;
 }

@@ -145,7 +145,7 @@ DivingTurtles::~DivingTurtles()
 	{
 		delete images;
 	}
-	for (auto images : renderer)
+	for (auto images : renderers)
 	{
 		delete images;
 	}

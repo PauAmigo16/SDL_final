@@ -82,7 +82,7 @@ typedef struct IDirect3DDevice9 IDirect3DDevice9;
  *
  * \since This function is available since SDL 2.0.1.
  */
-extern DECLSPEC IDirect3DDevice9* SDLCALL SDL_RenderGetD3D9Device(SDL_Renderer * renderer);
+extern DECLSPEC IDirect3DDevice9* SDLCALL SDL_RenderGetD3D9Device(SDL_Renderer * renderers);
 
 typedef struct ID3D11Device ID3D11Device;
 
@@ -96,7 +96,7 @@ typedef struct ID3D11Device ID3D11Device;
  * \returns the D3D11 device associated with given renderer or NULL if it is
  *          not a D3D11 renderer; call SDL_GetError() for more information.
  */
-extern DECLSPEC ID3D11Device* SDLCALL SDL_RenderGetD3D11Device(SDL_Renderer * renderer);
+extern DECLSPEC ID3D11Device* SDLCALL SDL_RenderGetD3D11Device(SDL_Renderer * renderers);
 
 /**
  * Get the DXGI Adapter and Output indices for the specified display index.

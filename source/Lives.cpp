@@ -14,7 +14,7 @@ Lives::Lives()
 
 		image->SetPosition({ (transform.GetPosition().x) + (RM->gridX*i) , transform.GetPosition().y});
 		image->SetScale(transform.GetScale().x, transform.GetScale().y);
-		renderer.push_back(image);
+		renderers.push_back(image);
 	}
 	lives = 3;
 }
@@ -28,7 +28,7 @@ void Lives::Render()
 {
 	for(int i = 0; i < lives; i++)
 	{
-		renderer[i]->Render();
+		renderers[i]->Render();
 	}
 }
 

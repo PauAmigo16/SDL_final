@@ -34,13 +34,13 @@ Crocodile::Crocodile(Vector2 velocity, Vector2 startPosition, int pos)
 
 
 	image->SetVelocity(this->velocity);
-	renderer.push_back(image);
+	renderers.push_back(image);
 }
 
 void Crocodile::Update()
 {
 	SetPosition({ transform.GetPosition().x + (velocity.x), transform.GetPosition().y + (velocity.y) });
-	for (auto render : renderer)
+	for (auto render : renderers)
 	{
 		render->Update();
 	}
@@ -48,7 +48,7 @@ void Crocodile::Update()
 
 void Crocodile::Render()
 {
-	for (auto render : renderer)
+	for (auto render : renderers)
 	{
 		render->Render();
 	}

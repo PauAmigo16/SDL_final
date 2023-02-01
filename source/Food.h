@@ -19,6 +19,6 @@ public:
 	virtual void Render() override;
 	virtual ~Food() override;
 	virtual void SetPosition(Vector2 p);
-	virtual bool GetFood() override;
+	virtual bool IsFood() override;
 
 };

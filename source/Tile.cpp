@@ -12,7 +12,7 @@ void Tile::Update()
 
 void Tile::Render()
 {
-	for (auto render : renderer)
+	for (auto render : renderers)
 	{
 		render->Render();
 	}
@@ -30,7 +30,7 @@ void Tile::SetImage(SDL_Rect sourceRect)
 	image->SetComponents({ 0,0,0 }, 255, 0, sourceRect);
 	image->SetPosition(transform.GetPosition());
 	image->SetScale(transform.GetScale());
-	renderer.push_back(image);
+	renderers.push_back(image);
 }
 
 void Tile::SetWater()

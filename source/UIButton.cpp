@@ -18,7 +18,7 @@ UIButton::UIButton(SDL_Rect target, std::string text)
 
 	button->SetPosition({ (transform.GetPosition().x), transform.GetPosition().y });
 	button->SetScale(transform.GetScale().x, transform.GetScale().y);
-	renderer.push_back(button);
+	renderers.push_back(button);
 
 
 
@@ -29,7 +29,7 @@ UIButton::UIButton(SDL_Rect target, std::string text)
 
 	buttonPressed->SetPosition({ (transform.GetPosition().x), transform.GetPosition().y });
 	buttonPressed->SetScale(transform.GetScale().x, transform.GetScale().y);
-	renderer.push_back(buttonPressed);
+	renderers.push_back(buttonPressed);
 }
 
 void UIButton::Update()
@@ -40,19 +40,19 @@ void UIButton::Update()
 void UIButton::Render()
 {
 	if(!InMousePos)
-		renderer[0]->Render();
+		renderers[0]->Render();
 	else
 	{
-		renderer[1]->Render();
+		renderers[1]->Render();
 	}
 
 	if (isClicked)
 	{
-		renderer[0]->SetPosition({ (float)(pos.x + (pos.w / 4)), (float)(pos.y + (pos.h / 4))});
-		renderer[0]->SetScale({ (float)(pos.w/2), (float)(pos.h/2) });
+		renderers[0]->SetPosition({ (float)(pos.x + (pos.w / 4)), (float)(pos.y + (pos.h / 4))});
+		renderers[0]->SetScale({ (float)(pos.w/2), (float)(pos.h/2) });
 
-		renderer[1]->SetPosition({ (float)(pos.x + (pos.w / 4)), (float)(pos.y + (pos.h / 4)) });
-		renderer[1]->SetScale({ (float)(pos.w / 2), (float)(pos.h / 2) });
+		renderers[1]->SetPosition({ (float)(pos.x + (pos.w / 4)), (float)(pos.y + (pos.h / 4)) });
+		renderers[1]->SetScale({ (float)(pos.w / 2), (float)(pos.h / 2) });
 
 		text->SetPosition({ (float)(textPos.x + (textPos.w / 4)), (float)(textPos.y + (textPos.h / 4)) });
 		text->SetScale({ (float)(textPos.w / 2), (float)(textPos.h / 2) });
@@ -60,11 +60,11 @@ void UIButton::Render()
 	}
 	else
 	{
-		renderer[0]->SetPosition({ (float)pos.x, (float)pos.y });
-		renderer[0]->SetScale({ (float)pos.w, (float)pos.h });
+		renderers[0]->SetPosition({ (float)pos.x, (float)pos.y });
+		renderers[0]->SetScale({ (float)pos.w, (float)pos.h });
 
-		renderer[1]->SetPosition({ (float)pos.x, (float)pos.y });
-		renderer[1]->SetScale({ (float)pos.w, (float)pos.h });
+		renderers[1]->SetPosition({ (float)pos.x, (float)pos.y });
+		renderers[1]->SetScale({ (float)pos.w, (float)pos.h });
 
 		text->SetPosition({ (float)textPos.x, (float)textPos.y });
 		text->SetScale({ (float)textPos.w, (float)textPos.h });

@@ -16,14 +16,14 @@ Turtles::Turtles(int lenght, Vector2 velocity, Vector2 startPosition, int rotati
 		image->SetPosition({ (transform.GetPosition().x + (RM->gridX * i)), transform.GetPosition().y });
 		image->SetScale(transform.GetScale().x / lenght, transform.GetScale().y);
 		image->SetVelocity(this->velocity);
-		renderer.push_back(image);
+		renderers.push_back(image);
 	}
 }
 
 void Turtles::Update()
 {
 	SetPosition({ transform.GetPosition().x + (velocity.x), transform.GetPosition().y + (velocity.y) });
-	for (auto render : renderer)
+	for (auto render : renderers)
 	{
 		render->Update();
 	}
@@ -31,7 +31,7 @@ void Turtles::Update()
 
 void Turtles::Render()
 {
-	for (auto render : renderer)
+	for (auto render : renderers)
 	{
 		render->Render();
 	}

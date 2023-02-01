@@ -34,13 +34,13 @@ Car::Car(Vector2 velocity, Vector2 startPosition, std::string id, int lenght, in
 	image->SetPosition({ (transform.GetPosition().x), transform.GetPosition().y });
 	image->SetScale(transform.GetScale().x, transform.GetScale().y);
 	image->SetVelocity(this->velocity);
-	renderer.push_back(image);
+	renderers.push_back(image);
 }
 
 void Car::Update()
 {
 	SetPosition({ transform.GetPosition().x + (velocity.x), transform.GetPosition().y + (velocity.y) });
-	for (auto render : renderer)
+	for (auto render : renderers)
 	{
 		render->Update();
 	}
@@ -48,7 +48,7 @@ void Car::Update()
 
 void Car::Render()
 {
-	for (auto render : renderer)
+	for (auto render : renderers)
 	{
 		render->Render();
 	}

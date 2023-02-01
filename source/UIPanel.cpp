@@ -14,7 +14,7 @@ UIPanel::UIPanel(SDL_Rect target, std::string mesage)
 
 	image->SetPosition({ (transform.GetPosition().x), transform.GetPosition().y });
 	image->SetScale(transform.GetScale().x, transform.GetScale().y);
-	renderer.push_back(image);
+	renderers.push_back(image);
 
 }
 
@@ -24,7 +24,7 @@ void UIPanel::Update()
 
 void UIPanel::Render()
 {
-	for (auto render : renderer)
+	for (auto render : renderers)
 	{
 		render->Render();
 	}

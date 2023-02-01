@@ -8,7 +8,7 @@ RenderManager::RenderManager(int width, int height)
 	windowWidht = width;
 	windowHeight = height;
 
-	int result = SDL_CreateWindowAndRenderer(windowWidht, windowHeight,SDL_WINDOW_SHOWN, &window, &renderer);
+	int result = SDL_CreateWindowAndRenderer(windowWidht, windowHeight,SDL_WINDOW_SHOWN, &window, &renderers);
 
 	bool success = result >= 0;
 	assert(success);
@@ -29,24 +29,24 @@ RenderManager* RenderManager::GetInstance()
 
 SDL_Renderer* RenderManager::GetRenderer()
 {
-	return renderer;
+	return renderers;
 }
 
 void RenderManager::ClearScreen()
 {
-	SDL_RenderClear(renderer);
+	SDL_RenderClear(renderers);
 
 }
 
 void RenderManager::RenderScreen()
 {
-	SDL_RenderPresent(renderer);
+	SDL_RenderPresent(renderers);
 
 }
 
 void RenderManager::Quit()
 {
-	SDL_DestroyRenderer(renderer);
+	SDL_DestroyRenderer(renderers);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 

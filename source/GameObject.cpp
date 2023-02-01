@@ -2,7 +2,7 @@
 
 GameObject::~GameObject()
 {
-    for (auto images : renderer)
+    for (auto images : renderers)
     {
         delete images;
     }

@@ -7,7 +7,7 @@
 class RenderManager {
 private:
 	SDL_Window* window;
-	SDL_Renderer* renderer;
+	SDL_Renderer* renderers;
 
 	static RenderManager* instance;
 

@@ -14,7 +14,7 @@ TimeBar::TimeBar()
 	 image->SetPosition({ (transform.GetPosition().x), transform.GetPosition().y });
 	 image->SetScale(transform.GetScale().x, transform.GetScale().y);
 
-	 renderer.push_back(image);
+	 renderers.push_back(image);
 }
 
 void TimeBar::Update()
@@ -24,12 +24,12 @@ void TimeBar::Update()
 	else
 		barSize = 1;
 
-	renderer[0]->SetScale(transform.GetScale().x* barSize, transform.GetScale().y);
+	renderers[0]->SetScale(transform.GetScale().x* barSize, transform.GetScale().y);
 }
 
 void TimeBar::Render()
 {
-	renderer[0]->Render();
+	renderers[0]->Render();
 }
 
 

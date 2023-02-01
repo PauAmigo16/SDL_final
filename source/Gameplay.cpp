@@ -200,7 +200,7 @@ void Gameplay::Update()
 			if ((objects[i]->GetTransform().GetPosition().x < -(objects[i]->GetTransform().GetScale().x) || objects[i]->GetTransform().GetPosition().x > RM->windowWidht))
 			{
 				//Si el objeto tenia comida, actualizar la escena para que sepa que no hay comida en pantalla y pueda spawnear una
-				if (objects[i]->GetFood())
+				if (objects[i]->IsFood())
 				{
 					food = false;
 				}
@@ -330,7 +330,7 @@ void Gameplay::Update()
 								states = States::DEATH;
 
 							}
-							else if (object->GetObject()->GetFood())
+							else if (object->GetObject()->IsFood())
 							{
 								player->AddFood();
 								object->deleteFood();

@@ -20,7 +20,7 @@ Frog::Frog()
 
 	image->SetPosition({ transform.GetPosition().x, transform.GetPosition().y });
 	image->SetScale(transform.GetScale().x, transform.GetScale().y);
-	renderer.push_back(image);
+	renderers.push_back(image);
 	}
 
 
@@ -106,8 +106,8 @@ void Frog::Update()
 						animation.SetRotation(-90);
 						animation.ActiveAnimation();
 					
-						renderer[0]->SetRotation(-90);
-						renderer[1]->SetRotation(-90);
+						renderers[0]->SetRotation(-90);
+						renderers[1]->SetRotation(-90);
 				}
 				else if (IM->CheckKeyState(SDLK_RIGHT, PRESSED))
 				{
@@ -123,8 +123,8 @@ void Frog::Update()
 						animation.SetRotation(90);
 						animation.ActiveAnimation();
 					
-						renderer[0]->SetRotation(90);
-						renderer[1]->SetRotation(90);
+						renderers[0]->SetRotation(90);
+						renderers[1]->SetRotation(90);
 				}
 				else if (IM->CheckKeyState(SDLK_UP, PRESSED))
 				{
@@ -140,8 +140,8 @@ void Frog::Update()
 						animation.SetRotation(0);
 						animation.ActiveAnimation();
 					
-						renderer[0]->SetRotation(0);
-						renderer[1]->SetRotation(0);
+						renderers[0]->SetRotation(0);
+						renderers[1]->SetRotation(0);
 
 						this->velocity.x = 0;
 						this->velocity.y = 0;
@@ -160,8 +160,8 @@ void Frog::Update()
 						animation.SetRotation(180);
 						animation.ActiveAnimation();
 					
-						renderer[0]->SetRotation(180);
-						renderer[1]->SetRotation(180);
+						renderers[0]->SetRotation(180);
+						renderers[1]->SetRotation(180);
 
 						this->velocity.x = 0;
 						this->velocity.y = 0;
@@ -293,12 +293,12 @@ void Frog::Render()
 			if (!addFood)
 			{
 
-				renderer[0]->Render();
+				renderers[0]->Render();
 
 			}
 			else
 			{
-				renderer[1]->Render();
+				renderers[1]->Render();
 
 			}
 		}
@@ -327,8 +327,8 @@ void Frog::SetPosition(Vector2 p)
 
 	deadAnimation.SetPosition(p);
 
-	renderer[0]->SetPosition(p);
-	renderer[1]->SetPosition(p);
+	renderers[0]->SetPosition(p);
+	renderers[1]->SetPosition(p);
 }
 
 void Frog::SetTransform(float x, float y, float w, float h, float rotation)

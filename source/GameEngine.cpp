@@ -3,7 +3,7 @@
 GameEngine::GameEngine(){
 
 	isRunning = false;
-	//lastFR = 0;
+	lastFR = 0;
 }
 
 #pragma region INITIALIZATION
@@ -39,7 +39,7 @@ srand(time(NULL));
 
 void GameEngine::Quit() {
 	//TODO save score
-	SDL_DestroyRenderer(renderer);
+	SDL_DestroyRenderer(renderers);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 	//RM->Quit();
