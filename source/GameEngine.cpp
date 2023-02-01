@@ -1,9 +1,10 @@
 #include "GameEngine.h"
 
-GameEngine::GameEngine() {
+GameEngine::GameEngine(int x, int y)
+	:windowHeight(y), windowWidth(x), isRunning(false) {
 
 	isRunning = false;
-	lastFrame = 0;
+	lastFR = 0;
 }
 
 #pragma region INITIALIZATION
@@ -11,42 +12,32 @@ void GameEngine::Init() {
 	//Initialize SDL
 	InitSDL();
 
-	TTF_Init();
 	//Create a window and a renderer
+	InitWindowAndRenderer();
 
+	//Initialize the scenes created
+	FillScenes();
 
-	Gameplay* gameplay = new Gameplay();
-	SplashScreen* splashScreen = new SplashScreen();
-	MainMenu* mainMenu = new MainMenu();
-
-	
-	SM->AddScene("Gameplay", gameplay);
-	SM->AddScene("splashScreen", splashScreen);
-	SM->AddScene("mainMenu", mainMenu);
-	//TODO add ranking
-	//SM->AddScene("ranking", );
-
-	SM->SetScene("splashScreen");
 }
 
 void GameEngine::InitSDL() {
 	int result = SDL_Init(SDL_INIT_VIDEO);
+	
+srand(time(NULL));
 
 	bool success = result >= 0;
 	if (!success)
 		throw SDL_GetError();
 }
 
-
-
-
-
 #pragma endregion INITIALIZATION
 
 void GameEngine::Quit() {
 	//TODO save score
-
-	RM->Quit();
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
+	SDL_Quit();
+	//RM->Quit();
 }
 
 
@@ -59,26 +50,36 @@ void GameEngine::Run() {
 
 		TM->Update();
 
-		if (TM->GetFrameIncrement() > lastFrame)
+		if (TM->GetFrameIncrement() > lastFR)
 		{		
 
-		SM->GetCurrentScene()->Update();
-
-
-		lastFrame = TM->GetFrameIncrement();
+			SM->GetCurrentScene()->Update();
+			lastFR = TM->GetFrameIncrement();
 		}			
 
 		Render();
 	}
 }
 
+void GameEngine::FillScenes()
+{
+	
+	SM->AddScene("Gameplay", new Gameplay());
+	SM->AddScene("splashScreen", new SplashScreen());
+	SM->AddScene("mainMenu", new MainMenu());
+	//TODO add ranking
+	//SM->AddScene("ranking", );
+	//Set the first scene
+	SM->SetScene("splashScreen");
+}
+
+
 void GameEngine::Render()
 {
+
 	RM->ClearScreen();
-
 	SM->GetCurrentScene()->Render();
-
 	SDL_RenderPresent(RM->GetRenderer());
-
 	RM->RenderScreen();
+
 }

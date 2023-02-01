@@ -12,13 +12,29 @@
 class GameEngine
 {
 private:
+	//------ EXECUTION CONTROL
 	bool isRunning;
 
+	//------ SDL
+	SDL_Window* window;
+	SDL_Renderer* renderer;
+
+	int windowWidth;
+	int windowHeight;
+
 	void InitSDL();
-	int lastFrame;
+	void InitWindowAndRenderer();
+	int lastFR;
+
+	//----- RENDER
+	int RandomNum();
 	void Render();
+	void FillScenes();
+
+
+
 public:
-	GameEngine();
+	GameEngine(int x, int y);
 	void Init();
 	void Run();
 	void Quit();

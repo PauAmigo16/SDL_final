@@ -11,8 +11,18 @@ RenderManager::RenderManager(int width, int height) : windowHeight(height), wind
 	assert(success);
 }
 
-RenderManager* RenderManager::GetInstance()
-{
+//RenderManager* RenderManager::GetInstance()
+//{
+//
+//	if (instance == nullptr)
+//	{
+//		instance = new RenderManager(224*3, 240*3, 0);
+//		instance->gridX = instance->windowWidht / 14;
+//		instance->gridY = instance->windowHeight / 15;
+//
+//	}
+//	return instance;
+//}
 
 	if (instance == nullptr)
 	{
