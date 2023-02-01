@@ -7,7 +7,8 @@ public:
 	Transform transform;
 	AABB boundingBox;
 	Vector2 velocity;
-	bool getDamage;
+	bool lethal;
+
 	Object() = default;
 	virtual void Update() = 0;
 	virtual void Render() = 0;

@@ -2,7 +2,7 @@
 
 EndPosition::EndPosition(Vector2 position)
 {
-	getDamage = false;
+	lethal = false;
 	frog = false;
 	SetTransform(position.x, position.y, (RM->gridX), RM->gridY, 0);
 
@@ -45,7 +45,7 @@ void EndPosition::Update()
 		{
 			addCrocodile = false;
 		}
-		getDamage = true;
+		lethal = true;
 
 	}
 	else if (addFly)
@@ -54,16 +54,16 @@ void EndPosition::Update()
 		{
 			addFly = false;
 		}
-		getDamage = false;
+		lethal = false;
 
 	}
 	else if(frog)
 	{
-		getDamage = true;
+		lethal = true;
 	}
 	else
 	{
-		getDamage = false;
+		lethal = false;
 
 	}
 

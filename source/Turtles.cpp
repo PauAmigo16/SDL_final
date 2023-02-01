@@ -4,7 +4,7 @@ Turtles::Turtles(int lenght, Vector2 velocity, Vector2 startPosition, int rotati
 {
 	this->velocity.x = (velocity.x * TM->GetDT());
 	this->velocity.y = (velocity.y * TM->GetDT());
-	getDamage = false;
+	lethal = false;
 
 	SetTransform(startPosition.x, startPosition.y, RM->gridX * lenght, RM->gridY, rotation);
 	for (int i = 0; i < lenght; i++)

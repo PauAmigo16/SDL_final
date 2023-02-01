@@ -4,7 +4,7 @@ DivingTurtles::DivingTurtles(int lenght, Vector2 velocity, Vector2 startPosition
 {
 	this->velocity.x = (velocity.x * TM->GetDT());
 	this->velocity.y = (velocity.y * TM->GetDT());
-	getDamage = false;
+	lethal = false;
 	isDiving = false;
 
 	SetTransform(startPosition.x, startPosition.y, RM->gridX * lenght, RM->gridY, rotation);
@@ -80,7 +80,7 @@ void DivingTurtles::Update()
 		//No hace daño hasta que no pasa 1 segundo de la animacion(la animacion completa)
 		if (damageTime + 1.0f < TM->GetCurrentTime())
 		{
-			getDamage = true;
+			lethal = true;
 		}
 	}
 	else
@@ -93,7 +93,7 @@ void DivingTurtles::Update()
 		//Deja de hacer daño despues de 0.5s (la mitad de la animacion)
 		if (damageTime + 0.5f < TM->GetCurrentTime())
 		{
-			getDamage = false;
+			lethal = false;
 		}
 	}
 }

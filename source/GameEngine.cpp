@@ -12,7 +12,8 @@ void GameEngine::Init() {
 	InitSDL();
 
 	//Create a window and a renderer
-	InitWindowAndRenderer();
+	//InitWindowAndRenderer();
+	TTF_Init();
 
 	//Initialize the scenes created
 	FillScenes();

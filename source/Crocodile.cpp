@@ -4,7 +4,7 @@ Crocodile::Crocodile(Vector2 velocity, Vector2 startPosition, int pos)
 {
 	this->velocity.x = (velocity.x * TM->GetDT());
 	this->velocity.y = (velocity.y * TM->GetDT());
-	getDamage = false;
+	lethal = false;
 
 
 		SetTransform(startPosition.x, startPosition.y, RM->gridX * 3, RM->gridY, 0);

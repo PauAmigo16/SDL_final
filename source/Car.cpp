@@ -4,7 +4,7 @@ Car::Car(Vector2 velocity, Vector2 startPosition, std::string id, int lenght, in
 {
 	this->velocity.x = (velocity.x*TM->GetDT());
 	this->velocity.y = (velocity.y * TM->GetDT());
-	getDamage = true;
+	lethal = true;
 
 	SetTransform(startPosition.x, startPosition.y, RM->gridX * lenght, RM->gridY, rotation);
 

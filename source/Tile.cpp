@@ -20,7 +20,7 @@ void Tile::Render()
 
 void Tile::IsLethal(bool isLethal)
 {
-	this->getDamage = isLethal;
+	this->lethal = isLethal;
 }
 
 void Tile::SetImage(SDL_Rect sourceRect)

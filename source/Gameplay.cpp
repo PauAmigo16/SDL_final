@@ -221,7 +221,7 @@ void Gameplay::Update()
 					{
 						if (endPositions[i]->boundingBox.CheckOverlappingAABB(&player->boundingBox))
 						{
-							if (endPositions[i]->getDamage)
+							if (endPositions[i]->lethal)
 							{
 								TM->PauseGame(true);
 								states = States::DEATH;
@@ -302,7 +302,7 @@ void Gameplay::Update()
 				{
 
 					objectFound = true;
-					if (object->getDamage)
+					if (object->lethal)
 					{
 						if (player->haveFood())
 							food = false;
@@ -321,7 +321,7 @@ void Gameplay::Update()
 						if (object->GetObject()->boundingBox.CheckOverlappingAABB(&player->boundingBox))
 						{
 							objectFound = true;
-							if (object->GetObject()->getDamage)
+							if (object->GetObject()->lethal)
 							{			
 								if (player->haveFood())
 									food = false;
@@ -349,7 +349,7 @@ void Gameplay::Update()
 					if (tile->boundingBox.CheckOverlappingAABB(&player->boundingBox))
 					{
 
-						if (tile->getDamage)
+						if (tile->lethal)
 						{
 							isWater = dynamic_cast<Tile*>(tile)->IsWater();
 

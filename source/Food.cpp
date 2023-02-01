@@ -11,7 +11,7 @@ Food::Food(float leftLimit, float logSize, Vector2 velocity, Vector2 startPositi
 	this->moveVelocity = (moveVelocity * TM->GetDT() * RM->gridX);
 
 
-	getDamage = false;
+	lethal = false;
 	isMoving = false;
 
 	movementTime = TM->GetCurrentTime()-1;

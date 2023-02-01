@@ -4,7 +4,7 @@ CrocodileMouth::CrocodileMouth(Vector2 velocity, Vector2 startPosition, int pos)
 {
 	this->velocity.x = (velocity.x * TM->GetDT());
 	this->velocity.y = (velocity.y * TM->GetDT());
-	getDamage = false;
+	lethal = false;
 
 	SetTransform(startPosition.x, startPosition.y, RM->gridX, RM->gridY, 0);
 
@@ -39,14 +39,14 @@ void CrocodileMouth::Update()
 	{
 		mouthOpen = false;
 		timeController = TM->GetCurrentTime();
-		getDamage = false;
+		lethal = false;
 
 	}
 	else if ((timeController + timeWithMouthClose) < TM->GetCurrentTime() && mouthOpen == false)
 	{
 		mouthOpen = true;
 		timeController = TM->GetCurrentTime();
-		getDamage = true;
+		lethal = true;
 	}
 
 

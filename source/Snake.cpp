@@ -12,7 +12,7 @@ Snake::Snake(float leftLimit, float logSize, float moveVelocity, Vector2 velocit
 	this->moveVelocity = (moveVelocity * TM->GetDT()* RM->gridX);
 
 
-	getDamage = true;
+	lethal = true;
 
 	SetTransform(startPosition.x, startPosition.y, (RM->gridX *1.5f), RM->gridY * 0.75f, 0);
 	

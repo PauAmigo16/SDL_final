@@ -1,29 +1,29 @@
 #include "AABB.h"
 
-AABB::AABB()
+AABB::AABB(Vector2 topLeft, Vector2 size) : topLeft(topLeft), size(size)
 {
-}
-
-AABB::AABB(Vector2 topLeft, Vector2 size)
-{
-	this->topLeft = topLeft;
-	this->size = size;
 }
 
 bool AABB::CheckOverlappingAABB(const AABB* other)
 {
-	//Comprobar si alguna esquina esta dentro de este objeto
-	//Esquina superior izquierda
-	if((((topLeft.x < other->topLeft.x && other->topLeft.x < (topLeft.x + size.x))) && ((topLeft.y < other->topLeft.y && other->topLeft.y < (topLeft.y + size.y)))))
+	//Top right corner
+	bool collision = (topLeft.x < other->topLeft.x&& other->topLeft.x < (topLeft.x + size.x)) && (topLeft.y < other->topLeft.y&& other->topLeft.y < (topLeft.y + size.y));
+	if (collision)
 		return true;
-	//Esquina superior derecha
-	if ((((topLeft.x < (other->topLeft.x+other->size.x) && (other->topLeft.x + other->size.x) < (topLeft.x + size.x))) && ((topLeft.y < other->topLeft.y && other->topLeft.y < (topLeft.y + size.y)))))
+
+	//Top left corner
+	collision = (topLeft.x < (other->topLeft.x + other->size.x)) && (other->topLeft.x + other->size.x) < (topLeft.x + size.x) && (topLeft.y < other->topLeft.y&& other->topLeft.y < (topLeft.y + size.y));
+	if (collision)
 		return true;
-	//Esquina inferior izquierda
-	if ((((topLeft.x < other->topLeft.x && other->topLeft.x < (topLeft.x + size.x))) && ((topLeft.y < (other->topLeft.y+other->size.y)&& (other->topLeft.y + other->size.y) < (topLeft.y + size.y)))))
+
+	//Bottom right corner
+	collision = (topLeft.x < other->topLeft.x&& other->topLeft.x < (topLeft.x + size.x)) && (topLeft.y < (other->topLeft.y + other->size.y) && (other->topLeft.y + other->size.y) < (topLeft.y + size.y));
+	if (collision)
 		return true;
-	//Esquina inferior derecha
-	if ((((topLeft.x < (other->topLeft.x + other->size.x) && (other->topLeft.x + other->size.x) < (topLeft.x + size.x))) && ((topLeft.y < (other->topLeft.y + other->size.y) && (other->topLeft.y + other->size.y) < (topLeft.y + size.y)))))
+
+	//Bottom left corner
+	collision = (topLeft.x < (other->topLeft.x + other->size.x) && (other->topLeft.x + other->size.x) < (topLeft.x + size.x)) && (topLeft.y < (other->topLeft.y + other->size.y) && (other->topLeft.y + other->size.y) < (topLeft.y + size.y));
+	if (collision)
 		return true;
 
 	return false;
@@ -58,11 +58,5 @@ void AABB::SetSize(Vector2 size)
 Vector2 AABB::GetCenter()
 {
 
-	return {topLeft.x+(size.x/2),topLeft.y + (size.y / 2) };
+	return { topLeft.x + (size.x / 2),topLeft.y + (size.y / 2) };
 }
-
-AABB::~AABB()
-{
-
-}
-
