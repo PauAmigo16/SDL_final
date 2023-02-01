@@ -23,8 +23,9 @@ private:
 	int windowHeight;
 
 	void InitSDL();
-	void InitWindowAndRenderer();
-	int lastFR;
+	//There's an errror trying to create the window on here...
+	//void InitWindowAndRenderer(int width, int height);
+	
 
 	//----- RENDER
 	int RandomNum();

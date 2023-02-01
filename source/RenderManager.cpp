@@ -3,7 +3,7 @@
 
 RenderManager* RenderManager::instance = nullptr;
 
-RenderManager::RenderManager(int width, int height, int flags)
+RenderManager::RenderManager(int width, int height)
 {
 	windowWidht = width;
 	windowHeight = height;
@@ -11,8 +11,7 @@ RenderManager::RenderManager(int width, int height, int flags)
 	int result = SDL_CreateWindowAndRenderer(windowWidht, windowHeight,SDL_WINDOW_SHOWN, &window, &renderer);
 
 	bool success = result >= 0;
-	if (!success)
-		throw SDL_GetError();
+	assert(success);
 }
 
 RenderManager* RenderManager::GetInstance()
@@ -20,7 +19,7 @@ RenderManager* RenderManager::GetInstance()
 
 	if (instance == nullptr)
 	{
-		instance = new RenderManager(224*3, 240*3, 0);
+		instance = new RenderManager(224*3, 240*3);
 		instance->gridX = instance->windowWidht / 14;
 		instance->gridY = instance->windowHeight / 15;
 
