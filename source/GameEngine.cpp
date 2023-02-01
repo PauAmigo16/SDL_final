@@ -3,7 +3,7 @@
 GameEngine::GameEngine(){
 
 	isRunning = false;
-	lastFR = 0;
+	//lastFR = 0;
 }
 
 #pragma region INITIALIZATION
@@ -12,8 +12,11 @@ void GameEngine::Init() {
 	InitSDL();
 
 	//Create a window and a renderer
-	//InitWindowAndRenderer();
+	
+	
+	//Initialize the font
 	TTF_Init();
+
 
 	//Initialize the scenes created
 	FillScenes();
@@ -29,6 +32,8 @@ srand(time(NULL));
 	if (!success)
 		throw SDL_GetError();
 }
+
+
 
 #pragma endregion INITIALIZATION
 
