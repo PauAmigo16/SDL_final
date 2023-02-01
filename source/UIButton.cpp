@@ -32,11 +32,6 @@ UIButton::UIButton(SDL_Rect target, std::string text)
 	renderers.push_back(buttonPressed);
 }
 
-void UIButton::Update()
-{
-
-}
-
 void UIButton::Render()
 {
 	if(!InMousePos)
@@ -56,7 +51,6 @@ void UIButton::Render()
 
 		text->SetPosition({ (float)(textPos.x + (textPos.w / 4)), (float)(textPos.y + (textPos.h / 4)) });
 		text->SetScale({ (float)(textPos.w / 2), (float)(textPos.h / 2) });
-
 	}
 	else
 	{
@@ -90,10 +84,8 @@ void UIButton::ComproveCollision(Vector2 point)
 			{
 				Pressed = true;
 				isClicked = false;
-
 			}
 		}
-
 	}
 	else
 	{

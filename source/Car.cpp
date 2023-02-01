@@ -10,6 +10,7 @@ Car::Car(Vector2 velocity, Vector2 startPosition, std::string id, int lenght, in
 
 	ImageRenderer* image = new ImageRenderer;
 	image->Load("resources/Assetsv1.png");
+
 	if (id == "racing0")
 		image->SetComponents({ 0,0,0 }, 255, 0, { 48,0,16,16 });
 
@@ -30,10 +31,10 @@ Car::Car(Vector2 velocity, Vector2 startPosition, std::string id, int lenght, in
 
 
 	image->SetRotation(transform.GetRotation());
-
 	image->SetPosition({ (transform.GetPosition().x), transform.GetPosition().y });
 	image->SetScale(transform.GetScale().x, transform.GetScale().y);
 	image->SetVelocity(this->velocity);
+
 	renderers.push_back(image);
 }
 

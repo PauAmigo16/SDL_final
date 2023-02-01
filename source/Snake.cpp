@@ -11,7 +11,6 @@ Snake::Snake(float leftLimit, float logSize, float moveVelocity, Vector2 velocit
 
 	this->moveVelocity = (moveVelocity * TM->GetDT()* RM->gridX);
 
-
 	lethal = true;
 
 	SetTransform(startPosition.x, startPosition.y, (RM->gridX *1.5f), RM->gridY * 0.75f, 0);
@@ -25,13 +24,15 @@ Snake::Snake(float leftLimit, float logSize, float moveVelocity, Vector2 velocit
 	animation->SetImage({ 0,128,32,16 });
 	animation->SetImage({ 32,128,32,16 });
 	animation->SetImage({ 64,128,32,16 });
+}
 
+Snake::~Snake()
+{
+	delete animation;
 }
 
 void Snake::Update()
 {
-
-
 	if (((transform.GetPosition().x + (velocity.x) + moveVelocity) < leftLimit)&& moveVelocity < 0)
 	{
 		moveVelocity = -moveVelocity;
@@ -53,11 +54,6 @@ void Snake::Update()
 void Snake::Render()
 {
 	animation->Render();
-}
-
-Snake::~Snake()
-{
-	delete animation;
 }
 
 void Snake::SetPosition(Vector2 p)

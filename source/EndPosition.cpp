@@ -74,7 +74,6 @@ void EndPosition::Render()
 	if (addCrocodile)
 	{
 		crocodile.Render();
-
 	}
 	else if (addFly)
 	{
@@ -82,7 +81,6 @@ void EndPosition::Render()
 	}
 	else if (frog)
 	{
-
 		frogImage.Render();
 	}
 }

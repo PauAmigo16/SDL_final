@@ -35,6 +35,7 @@ DivingTurtles::DivingTurtles(int lenght, Vector2 velocity, Vector2 startPosition
 		this->surfaceAnimation.push_back(surfaceAnimation);
 
 	}	
+
 	currentAnimationTime = TM->GetCurrentTime();
 	surfaceTime = (3 + (rand() % 4)) + static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 	diveTime = 1 + static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
@@ -43,7 +44,6 @@ DivingTurtles::DivingTurtles(int lenght, Vector2 velocity, Vector2 startPosition
 void DivingTurtles::Update()
 {
 	SetPosition({ transform.GetPosition().x + (velocity.x), transform.GetPosition().y + (velocity.y) });
-
 
 	if ((currentAnimationTime + surfaceTime) < TM->GetCurrentTime() && isDiving == false)
 	{
@@ -77,11 +77,7 @@ void DivingTurtles::Update()
 			anim->Update();
 
 		}
-		//No hace daño hasta que no pasa 1 segundo de la animacion(la animacion completa)
-		if (damageTime + 1.0f < TM->GetCurrentTime())
-		{
-			lethal = true;
-		}
+		lethal = true;
 	}
 	else
 	{
@@ -90,11 +86,7 @@ void DivingTurtles::Update()
 			anim->Update();
 
 		}
-		//Deja de hacer daño despues de 0.5s (la mitad de la animacion)
-		if (damageTime + 0.5f < TM->GetCurrentTime())
-		{
-			lethal = false;
-		}
+		lethal = false;
 	}
 }
 
@@ -122,6 +114,7 @@ void DivingTurtles::SetPosition(Vector2 p)
 {
 	transform.SetPosition(p);
 	boundingBox.SetTopLeft(p);
+
 	for (int i = 0; i < divingAnimation.size(); i++)
 	{
 	divingAnimation[i]->SetPosition({p.x+(i*RM->gridX),p.y});

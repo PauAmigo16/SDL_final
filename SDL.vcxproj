@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\ScoreObtained.cpp" />
     <ClCompile Include="source\Lives.cpp" />
     <ClCompile Include="source\Score.cpp" />
     <ClCompile Include="source\EndPosition.cpp" />
@@ -60,7 +59,6 @@
     <ClCompile Include="source\TimeBar.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\ScoreObtained.h" />
     <ClInclude Include="source\Lives.h" />
     <ClInclude Include="source\Score.h" />
     <ClInclude Include="source\EndPosition.h" />

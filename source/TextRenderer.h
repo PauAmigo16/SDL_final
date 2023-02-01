@@ -11,7 +11,7 @@ private:
 
 public:
 	TextRenderer(SDL_Color color, float alpha, float rotation, SDL_Rect targetRect, std::string text);
-	
+
 	void Load(std::string path) override;
 	void Render() override;
 

@@ -123,9 +123,6 @@
     <ClCompile Include="source\Lives.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\ScoreObtained.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\UIButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -237,9 +234,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Lives.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\ScoreObtained.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\UIPanel.h">

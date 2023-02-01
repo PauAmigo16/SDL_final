@@ -247,13 +247,10 @@ void Gameplay::Update()
 								{
 									food = false;
 									dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(200);
-									player->addScoreObtainedImage(true, endPositions[i]->transform.GetPosition());
-
 								}
 								else
 								{
 									dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(100);
-									player->addScoreObtainedImage(false, endPositions[i]->transform.GetPosition());
 
 								}
 								TM->PauseGame(true);
@@ -273,7 +270,6 @@ void Gameplay::Update()
 								{
 									food = false;
 									dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(100);
-									player->addScoreObtainedImage(false, endPositions[i]->transform.GetPosition());
 
 								}
 								TM->PauseGame(true);
@@ -471,8 +467,6 @@ void Gameplay::Update()
 
 		break;
 	case Gameplay::REACHEND:
-		player->UpdateScore();
-
 		if (reachEndTime + 2 < TM->GetCurrentTimeInPause())
 		{
 			if(endPosition != 0)
@@ -543,9 +537,6 @@ void Gameplay::Render()
 		{
 			dynamic_cast<UIPanel*>(gameUI.find("gameOver")->second)->Render();
 		}
-		break;
-	case Gameplay::REACHEND:
-		player->RenderScore();
 		break;
 	default:
 		break;

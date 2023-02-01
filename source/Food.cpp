@@ -1,15 +1,14 @@
 #include "Food.h"
 
-Food::Food(float leftLimit, float logSize, Vector2 velocity, Vector2 startPosition)
+Food::Food(float logPos, float logSize, Vector2 velocity, Vector2 startPosition)
 {
 	this->velocity.x = (velocity.x * TM->GetDT());
 	this->velocity.y = (velocity.y * TM->GetDT());
 
-	this->leftLimit = leftLimit;
+	this->leftLimit = logPos;
 	this->rightLimit = logSize;
 
 	this->moveVelocity = (moveVelocity * TM->GetDT() * RM->gridX);
-
 
 	lethal = false;
 	isMoving = false;
@@ -32,10 +31,13 @@ Food::Food(float leftLimit, float logSize, Vector2 velocity, Vector2 startPositi
 
 }
 
+Food::~Food()
+{
+	delete animation;
+}
+
 void Food::Update()
 {
-
-
 	leftLimit += (velocity.x);
 
 	if ((movementTime + 1 < TM->GetCurrentTime()) && !isMoving)
@@ -80,19 +82,11 @@ void Food::Update()
 	animation->Update();
 
 	SetPosition({ transform.GetPosition().x + (velocity.x) + moveVelocity, transform.GetPosition().y + (velocity.y) });
-
 }
 
 void Food::Render()
 {
 	animation->Render();
-
-}
-
-Food::~Food()
-{
-	delete animation;
-
 }
 
 void Food::SetPosition(Vector2 p)

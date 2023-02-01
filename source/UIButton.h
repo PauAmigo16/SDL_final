@@ -15,10 +15,14 @@ public:
 	bool InMousePos;
 	bool Pressed;
 	bool isClicked;
+
 	UIButton(SDL_Rect target, std::string text);
-	virtual void Update() override;
+
+	virtual void Update() override {}
 	virtual void Render() override;
+
 	void ComproveCollision(Vector2 point);
+
 	void SetText(std::string mesage);
 };
 

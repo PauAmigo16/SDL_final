@@ -6,8 +6,7 @@ Crocodile::Crocodile(Vector2 velocity, Vector2 startPosition, int pos)
 	this->velocity.y = (velocity.y * TM->GetDT());
 	lethal = false;
 
-
-		SetTransform(startPosition.x, startPosition.y, RM->gridX * 3, RM->gridY, 0);
+	SetTransform(startPosition.x, startPosition.y, RM->gridX * 3, RM->gridY, 0);
 
 	ImageRenderer* image = new ImageRenderer;
 	image->Load("resources/Assetsv1.png");
@@ -27,13 +26,11 @@ Crocodile::Crocodile(Vector2 velocity, Vector2 startPosition, int pos)
 	else
 	{
 		image->SetPosition({ (transform.GetPosition().x), transform.GetPosition().y });
-
-
 	}
-		image->SetScale(RM->gridX * 2, transform.GetScale().y);
-
-
+	
+	image->SetScale(RM->gridX * 2, transform.GetScale().y);
 	image->SetVelocity(this->velocity);
+
 	renderers.push_back(image);
 }
 

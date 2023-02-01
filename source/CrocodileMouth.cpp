@@ -28,6 +28,7 @@ CrocodileMouth::CrocodileMouth(Vector2 velocity, Vector2 startPosition, int pos)
 		image->SetVelocity(this->velocity);
 		renderers.push_back(image);
 	}
+
 	timeController = TM->GetCurrentTime();
 	timeWithMouthOpen = 1 + static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 	timeWithMouthClose = 1 + static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
@@ -49,8 +50,6 @@ void CrocodileMouth::Update()
 		lethal = true;
 	}
 
-
-
 	SetPosition({ transform.GetPosition().x + (velocity.x), transform.GetPosition().y + (velocity.y) });
 	for (auto render : renderers)
 	{
@@ -64,5 +63,4 @@ void CrocodileMouth::Render()
 		renderers[1]->Render();
 	else
 		renderers[0]->Render();
-
 }

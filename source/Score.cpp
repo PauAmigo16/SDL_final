@@ -8,9 +8,31 @@ Score::Score()
 	text->Load("resources/pixelart.ttf");
 
 	SetTransform(RM->gridX / 3, RM->gridY / 4, RM->gridX/3, RM->gridY/2, 0);
+}
 
+void Score::Render()
+{
+	text->Render();
+}
 
+void Score::AddScore(int score)
+{
+	this->score += score;
 
+	text->SetText(GetString(this->score));
+}
+
+void Score::SetScore(int score)
+{
+	this->score = score;
+
+	text->SetText(GetString(this->score));
+
+}
+
+int Score::GetScore()
+{
+	return score;
 }
 
 std::string Score::GetString(int num) {
@@ -26,33 +48,3 @@ std::string Score::GetString(int num) {
 
 	return str;
 }
-
-void Score::Update()
-{
-}
-
-void Score::Render()
-{
-	text->Render();
-}
-
-void Score::AddScore(int score)
-{
-	this->score += score;
-
-	text->SetText(GetString(this->score));
-}
-
-int Score::GetScore()
-{
-	return score;
-}
-
-void Score::SetScore(int score)
-{
-	this->score = score;
-
-	text->SetText(GetString(this->score));
-
-}
-

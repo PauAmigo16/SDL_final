@@ -9,14 +9,16 @@ class Score:public GameObject
 private:
 	TextRenderer* text;
 	int score;
-public:
 
+public:
 	Score();
-	virtual void Update() override;
+
+	virtual void Update() override {}
 	virtual void Render() override;
+
 	void AddScore(int score);
-	int GetScore();
 	void SetScore(int score);
+	int GetScore();
 	std::string GetString(int num);
 };
 

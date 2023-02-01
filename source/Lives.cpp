@@ -19,11 +19,6 @@ Lives::Lives()
 	lives = 3;
 }
 
-void Lives::Update()
-{
-
-}
-
 void Lives::Render()
 {
 	for(int i = 0; i < lives; i++)
