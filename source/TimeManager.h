@@ -6,24 +6,35 @@
 
 class TimeManager {
 private:
-	float deltaTime;
-	float lastGameTime;
-	float Time;
 	static TimeManager* instance;
-	TimeManager();
-	int frameIncrement;
+
+	float dt;
+	float lastGameTime;
+	float eTime;
 	float currentFrameTime;
+
+	int frameIncrement;
+
 	bool pause;
+
+	TimeManager();
+
 public:
-	static const float FPS;
-	static const float TICK;
+
+	static const float FPS;//140.0f
+	static const float TICK;//1.0f / 140.f
+
 	static TimeManager* GetInstance();
+
 	void Update();
+
 	float GetCurrentTime();
 	float GetDT();
-	int GetFrameIncrement();
-	void PauseGame(bool pause);
-	bool GameState();
 	float GetCurrentTimeInPause();
 
+	int GetFrameIncrement();
+
+	void PauseGame(bool pause);
+
+	bool GameState();
 };

@@ -8,10 +8,10 @@ TimeManager* TimeManager::instance = nullptr;
 
 TimeManager::TimeManager()
 {
-	deltaTime = 0;
+	dt = 0;
 	lastGameTime = SDL_GetTicks();
 	currentFrameTime = 0;
-	Time = 0;
+	eTime = 0;
 	pause = false;
 }
 
@@ -27,13 +27,13 @@ TimeManager* TimeManager::GetInstance()
 void TimeManager::Update()
 {
 
-	deltaTime = (SDL_GetTicks() - lastGameTime) / 1000;
+	dt = (SDL_GetTicks() - lastGameTime) / 1000;
 	lastGameTime = SDL_GetTicks();
 
 	if(!pause)
-		Time += deltaTime;
+		eTime += dt;
 
-	currentFrameTime += deltaTime;
+	currentFrameTime += dt;
 
 	frameIncrement = currentFrameTime / TICK;
 
@@ -42,13 +42,18 @@ void TimeManager::Update()
 float TimeManager::GetCurrentTime()
 {
 
-    return Time;
+    return eTime;
 }
 
 float TimeManager::GetDT()
 {
 		return TICK;
 
+}
+
+float TimeManager::GetCurrentTimeInPause()
+{
+	return currentFrameTime;
 }
 
 int TimeManager::GetFrameIncrement()
@@ -67,7 +72,3 @@ bool TimeManager::GameState()
 	return pause;
 }
 
-float TimeManager::GetCurrentTimeInPause()
-{
-	return currentFrameTime;
-}

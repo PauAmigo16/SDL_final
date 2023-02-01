@@ -49,3 +49,8 @@ void SceneManager::SetScene(std::string name)
 		currentScene->OnEnter();
 	}
 }
+
+void SceneManager::ClearScenes()
+{
+	scenes.clear();
+}
