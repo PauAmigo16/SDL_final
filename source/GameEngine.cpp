@@ -1,7 +1,6 @@
 #include "GameEngine.h"
 
-GameEngine::GameEngine(int x, int y)
-	:windowHeight(y), windowWidth(x), isRunning(false) {
+GameEngine::GameEngine(){
 
 	isRunning = false;
 	lastFR = 0;

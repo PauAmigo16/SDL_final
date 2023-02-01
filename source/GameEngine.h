@@ -34,7 +34,7 @@ private:
 
 
 public:
-	GameEngine(int x, int y);
+	GameEngine();
 	void Init();
 	void Run();
 	void Quit();

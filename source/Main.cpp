@@ -5,7 +5,7 @@
 int main(int argc, char* args[]) {
 	srand(time(NULL));
 
-	GameEngine game(224,240);
+	GameEngine game;
 	game.Init();
 	game.Run();
 	game.Quit();

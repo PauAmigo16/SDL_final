@@ -3,34 +3,28 @@
 
 RenderManager* RenderManager::instance = nullptr;
 
-RenderManager::RenderManager(int width, int height) : windowHeight(height), windowWidht(width)
+RenderManager::RenderManager(int width, int height, int flags)
 {
-	int result = SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_SHOWN, &window, &renderer);
+	windowWidht = width;
+	windowHeight = height;
+
+	int result = SDL_CreateWindowAndRenderer(windowWidht, windowHeight,SDL_WINDOW_SHOWN, &window, &renderer);
 
 	bool success = result >= 0;
-	assert(success);
+	if (!success)
+		throw SDL_GetError();
 }
 
-//RenderManager* RenderManager::GetInstance()
-//{
-//
-//	if (instance == nullptr)
-//	{
-//		instance = new RenderManager(224*3, 240*3, 0);
-//		instance->gridX = instance->windowWidht / 14;
-//		instance->gridY = instance->windowHeight / 15;
-//
-//	}
-//	return instance;
-//}
+RenderManager* RenderManager::GetInstance()
+{
 
 	if (instance == nullptr)
 	{
-		instance = new RenderManager(224*3, 240*3);
+		instance = new RenderManager(224*3, 240*3, 0);
 		instance->gridX = instance->windowWidht / 14;
 		instance->gridY = instance->windowHeight / 15;
-	}
 
+	}
 	return instance;
 }
 
@@ -48,6 +42,7 @@ void RenderManager::ClearScreen()
 void RenderManager::RenderScreen()
 {
 	SDL_RenderPresent(renderer);
+
 }
 
 void RenderManager::Quit()
@@ -55,4 +50,5 @@ void RenderManager::Quit()
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
+
 }
