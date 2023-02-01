@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<Level>
+	<MaxTime>20</MaxTime>
+	<Layout>
+		<EndZone hazardChance="20"/>
+		<LogRiver minLength="2" maxLength="3">
+			<SpawnRate min="3" max="5"/>
+			<CrocodileChance>50</CrocodileChance>
+			<SnakeChance>30</SnakeChance>
+		</LogRiver>
+		<TurtlesRiver minLength="2" maxLength="3">
+			<SpawnRate min="3" max="6"/>
+			<DiveChance>30</DiveChance>
+		</TurtlesRiver>
+		<LogRiver minLength="2" maxLength="4">
+			<SpawnRate min="4" max="6"/>
+			<CrocodileChance>30</CrocodileChance>
+			<SnakeChance>50</SnakeChance>
+		</LogRiver>
+		<LogRiver minLength="2" maxLength="3">
+			<SpawnRate min="3" max="5"/>
+			<CrocodileChance>50</CrocodileChance>
+			<SnakeChance>30</SnakeChance>
+		</LogRiver>
+		<TurtlesRiver minLength="2" maxLength="3">
+			<SpawnRate min="3" max="6"/>
+			<DiveChance>50</DiveChance>
+		</TurtlesRiver>
+		<LogRiver minLength="2" maxLength="3">
+			<SpawnRate min="3" max="5"/>
+			<CrocodileChance>30</CrocodileChance>
+			<SnakeChance>50</SnakeChance>
+		</LogRiver>
+		<SafeZone/>
+		<Road cardID="racing1">
+			<SpawnRate min="2" max="4"/>
+			<Speed>4</Speed>
+		</Road>
+		<Road cardID="family0">
+			<SpawnRate min="2" max="4"/>
+			<Speed>5</Speed>
+		</Road>
+		<Road cardID="farming0">
+			<SpawnRate min="3" max="5"/>
+			<Speed>3</Speed>
+		</Road>
+		<Road cardID="racing0">
+			<SpawnRate min="2" max="4"/>
+			<Speed>4</Speed>
+		</Road>
+		<SafeZone/>
+	</Layout>
+</Level>
+
