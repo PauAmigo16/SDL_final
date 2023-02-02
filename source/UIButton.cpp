@@ -9,7 +9,7 @@ UIButton::UIButton(SDL_Rect target, std::string text)
 	textPos = { (int)((target.x) + (target.w * 0.15f)), (int)((target.y) + (target.h * 0.15f)), (int)((float)target.w * 0.7f), (int)((target.h) * 0.7f)};
 	SetTransform(target.x, target.y, target.w, target.h, 0);
 	this->text = new TextRenderer({255,255,255},255,0,{ target.x, target.y, target.w, target.h },text);
-	this->text->Load("resources/pixelart.ttf");
+	this->text->Load("resources/myFont.ttf");
 
 	ImageRenderer* button = new ImageRenderer;
 	button->Load("resources/Button.png");

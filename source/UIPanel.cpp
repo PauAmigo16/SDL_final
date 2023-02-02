@@ -4,7 +4,7 @@
 UIPanel::UIPanel(SDL_Rect target, std::string mesage)
 {
 	text = new TextRenderer({255,255,255},255,0,{ (int)(target.x + (target.w * 0.1f)) , (int)(target.y + (target.h * 0.05f)) , (int)(target.w*0.8f) , (int)(target.h/3) }, mesage);
-	text->Load("resources/pixelart.ttf");
+	text->Load("resources/myFont.ttf");
 	SetTransform(target.x, target.y, target.w, target.h, 0);
 
 	ImageRenderer* image = new ImageRenderer;

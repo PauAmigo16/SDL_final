@@ -19,7 +19,7 @@ Gameplay::Gameplay()
 	gameUI.emplace("lives", lives);
 
 	text = new TextRenderer({ 255,255,255 }, 255, 0, { (int)((RM->windowWidht/8)*3), (int)(RM->gridY / 4), (int)((RM->windowWidht / 8) * 2), (int)(RM->gridY/2) }, "Max Score");
-	text->Load("resources/pixelart.ttf");
+	text->Load("resources/myFont.ttf");
 
 
 	position = RM->gridY*13;
