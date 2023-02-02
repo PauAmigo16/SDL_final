@@ -49,12 +49,12 @@ void UIPanel::StopPress()
 {
 	for (auto button : buttons)
 	{
-		button.second->Pressed = false;
+		button.second->isPressed = false;
 	}
 }
 
 bool UIPanel::ComproveIfButtonPresed(std::string name)
 {
-	return buttons.find(name)->second->Pressed;
+	return buttons.find(name)->second->isPressed;
 }
 

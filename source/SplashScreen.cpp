@@ -21,12 +21,13 @@ SplashScreen::SplashScreen()
 
 	entiLogo = new ImageRenderer();
 	entiLogo->Load("resources/logo-enti.png");
-	entiLogo->SetPosition({ (float)(RM->windowWidht / 4), (float)(16*4) });
-	entiLogo->SetComponents({ 0,0,0 }, 255, 0, { 0,144,200,200 });
+	entiLogo->SetPosition({ (float)((RM->windowWidht / 2)-(RM->gridY * 4 /2)), (float)(RM->windowHeight / 2) + (RM->gridY * 3 / 2) });
+	entiLogo->SetScale((int)RM->gridX * 4, (int)RM->gridY * 4);
+	entiLogo->SetComponents({ 0,0,0 }, 255, 0, { 0,0,255,255 });
 
 
 	title[0]->SetComponents({ 0,0,0 }, 255, 0, { 0,144,16,16 });
-	title[1]->SetComponents({ 0,0,0 }, 255, 0, { 16,144,10,16 });
+	title[1]->SetComponents({ 0,0,0 }, 255, 0, { 16,144,16,16 });
 	title[2]->SetComponents({ 0,0,0 }, 255, 0, { 32,144,16,16 });
 	title[3]->SetComponents({ 0,0,0 }, 255, 0, { 48,144,16,16 });
 	title[4]->SetComponents({ 0,0,0 }, 255, 0, { 48,144,16,16 });
@@ -36,7 +37,7 @@ SplashScreen::SplashScreen()
 
 void SplashScreen::Update()
 {
-	if (time + 1.5f < TM->GetCurrentTime())
+	if (time + 3.0f < TM->GetCurrentTime())
 	{
 		SM->SetScene("mainMenu");
 	}
