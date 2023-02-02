@@ -3,7 +3,7 @@
 
 Gameplay::Gameplay()
 {
-	states = States::GAMEPLAY;
+	states = GameState::GAMEPLAY;
 	level = 1;
 	player = new Frog();
 	food = false;
@@ -31,21 +31,21 @@ Gameplay::Gameplay()
 		(int)(RM->windowHeight/4),
 		(int)(RM->windowWidht/2),
 		(int)(RM->windowHeight/2) 
-		}, "Reload Game?");
+		}, "GAME OVER");
 
 	gameOver->AddButton({ 
 		(int)gameOver->transform.GetPosition().x+((int)gameOver->transform.GetScale().x/4),
 		(int)gameOver->transform.GetPosition().y+(int)((gameOver->transform.GetScale().y/4)*2),
 		(int)gameOver->transform.GetScale().x/2, 
 		(int)gameOver->transform.GetScale().y/6 
-		}, "returnGame", "Yes");
+		}, "returnGame", "Reload");
 
 	gameOver->AddButton({ 
 		(int)gameOver->transform.GetPosition().x + ((int)gameOver->transform.GetScale().x/4),
 		(int)gameOver->transform.GetPosition().y + (int)((gameOver->transform.GetScale().y/4)*3),
 		(int)gameOver->transform.GetScale().x/2, 
 		(int)gameOver->transform.GetScale().y/6 
-		}, "returnMenu", "No");
+		}, "returnMenu", "Exit");
 
 	gameUI.emplace("gameOver", gameOver);
 
@@ -73,18 +73,13 @@ Gameplay::Gameplay()
 	gameUI.emplace("Pause", pause);
 
 }
-
-
-
-void Gameplay::SaveScore()
-{
-}
-
 void Gameplay::LoadLevelFromFile(std::string path)
 {
 	LevelLoader::LoadLevel(path,this);
 }
-
+void Gameplay::SaveScore()
+{
+}
 void Gameplay::Update()
 {
 	int endPosition = 0;
@@ -104,7 +99,7 @@ void Gameplay::Update()
 		if (IM->CheckKeyState(SDLK_p, PRESSED))
 		{
 			TM->PauseGame(true);
-			states = States::PAUSE;
+			states = GameState::PAUSE;
 			break;
 		}
 
@@ -120,7 +115,7 @@ void Gameplay::Update()
 			if (player->haveFood())
 				food = false;
 
-			states = States::DEATH;
+			states = GameState::DEAD;
 
 		}
 
@@ -218,13 +213,13 @@ void Gameplay::Update()
 			lostLive = true;
 
 			for (int i = 0; i < endPositions.size();i++)
-					{
+			{
 						if (endPositions[i]->boundingBox.CheckOverlappingAABB(&player->boundingBox))
 						{
 							if (endPositions[i]->lethal)
 							{
 								TM->PauseGame(true);
-								states = States::DEATH;
+								states = GameState::DEAD;
 								player->Respawn();
 								if (player->haveFood())
 									food = false;
@@ -254,7 +249,7 @@ void Gameplay::Update()
 
 								}
 								TM->PauseGame(true);
-								states = States::REACHEND;
+								states = GameState::MAPEND;
 								reachEndTime = TM->GetCurrentTimeInPause();
 
 							}
@@ -273,7 +268,7 @@ void Gameplay::Update()
 
 								}
 								TM->PauseGame(true);
-								states = States::REACHEND;
+								states = GameState::MAPEND;
 								reachEndTime = TM->GetCurrentTimeInPause();
 
 								if (endPosition != 1)
@@ -282,12 +277,12 @@ void Gameplay::Update()
 									AM->PlayClip("EndLevel", 0);
 							}
 						}
-					}
+			}
 
 
 
 
-		//Comprobar collision del player con el resto de objetos y tiles cuando no se esta moviendo ni esta muerto
+		
 		if (!player->IsMoving() && !player->IsDead())
 		{
 		
@@ -304,7 +299,7 @@ void Gameplay::Update()
 							food = false;
 						player->Respawn();
 						TM->PauseGame(true);
-						states = States::DEATH;
+						states = GameState::DEAD;
 
 					}
 					else
@@ -323,7 +318,7 @@ void Gameplay::Update()
 									food = false;
 								player->Respawn();
 								TM->PauseGame(true);
-								states = States::DEATH;
+								states = GameState::DEAD;
 
 							}
 							else if (object->GetObject()->IsFood())
@@ -355,7 +350,7 @@ void Gameplay::Update()
 								food = false;
 							player->Respawn();
 							TM->PauseGame(true);
-							states = States::DEATH;
+							states = GameState::DEAD;
 
 						}
 					}
@@ -399,7 +394,7 @@ void Gameplay::Update()
 		if (dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->ComproveIfButtonPresed("restart"))
 		{
 			TM->PauseGame(false);
-			states = States::GAMEPLAY;
+			states = GameState::GAMEPLAY;
 			dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->StopPress();
 		}
 		else if (dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->ComproveIfButtonPresed("exit"))
@@ -410,7 +405,7 @@ void Gameplay::Update()
 			TM->PauseGame(false);
 
 			SM->SetScene("mainMenu");
-			states = States::GAMEPLAY;
+			states = GameState::GAMEPLAY;
 			dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->StopPress();
 
 			death = false;
@@ -421,7 +416,7 @@ void Gameplay::Update()
 		}
 
 		break;
-	case Gameplay::DEATH:
+	case Gameplay::DEAD:
 		player->Update();
 
 		if (!death)
@@ -430,7 +425,7 @@ void Gameplay::Update()
 		    if (player->IsDead() == false)
 			{
 				TM->PauseGame(false);
-				states = States::GAMEPLAY;
+				states = GameState::GAMEPLAY;
 
 			}
 		}
@@ -442,7 +437,7 @@ void Gameplay::Update()
 			{
 				TM->PauseGame(false);
 				player->returnGame();
-				states = States::GAMEPLAY;
+				states = GameState::GAMEPLAY;
 				RestartLevel();
 				dynamic_cast<UIPanel*>(gameUI.find("gameOver")->second)->StopPress();
 
@@ -453,7 +448,7 @@ void Gameplay::Update()
 				TM->PauseGame(false);
 				
 				SM->SetScene("mainMenu");
-				states = States::GAMEPLAY;
+				states = GameState::GAMEPLAY;
 
 				dynamic_cast<UIPanel*>(gameUI.find("gameOver")->second)->StopPress();
 
@@ -466,11 +461,11 @@ void Gameplay::Update()
 	
 
 		break;
-	case Gameplay::REACHEND:
+	case Gameplay::MAPEND:
 		if (reachEndTime + 2 < TM->GetCurrentTimeInPause())
 		{
 			if(endPosition != 0)
-				states = States::GAMEPLAY;
+				states = GameState::GAMEPLAY;
 			else
 			{
 
@@ -479,7 +474,7 @@ void Gameplay::Update()
 				level += 1;
 
 				OnEnter();
-				states = States::GAMEPLAY;
+				states = GameState::GAMEPLAY;
 
 			}
 			TM->PauseGame(false);
@@ -530,7 +525,7 @@ void Gameplay::Render()
 		dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->Render();
 
 		break;
-	case Gameplay::DEATH:
+	case Gameplay::DEAD:
 		player->Render();
 
 		if (death)
@@ -552,12 +547,11 @@ void Gameplay::OnEnter()
 
 	if (level == 1)
 	{
-		LoadLevelFromFile("res/files/Level1.xml");
+		LoadLevelFromFile("res/files/lvl1.xml");
 	}
 	else if (level == 2)
 	{
-		LoadLevelFromFile("res/files/Level2.xml");
-
+		LoadLevelFromFile("res/files/lvl2.xml");
 	}
 	else
 	{
@@ -567,7 +561,7 @@ void Gameplay::OnEnter()
 		TM->PauseGame(false);
 
 		SM->SetScene("mainMenu");
-		states = States::GAMEPLAY;
+		states = GameState::GAMEPLAY;
 
 		death = false;
 
@@ -601,7 +595,7 @@ void Gameplay::OnExit()
 	objects.resize(0);
 	endPositions.resize(0);
 
-	AM->StopAudios();
+	AM->MuteAudio();
 }
 
 void Gameplay::SetObject(Object* object)

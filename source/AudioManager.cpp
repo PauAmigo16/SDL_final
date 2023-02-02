@@ -64,7 +64,7 @@ void AudioManager::PlayMusic(std::string audioName)
 	Mix_FadeInMusic(music[audioName], -1, 200);
 }
 
-void AudioManager::StopAudios()
+void AudioManager::MuteAudio()
 {
 	Mix_CloseAudio();
 	assert(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) != -1);

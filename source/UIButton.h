@@ -21,7 +21,7 @@ public:
 	virtual void Update() override {}
 	virtual void Render() override;
 
-	void ComproveCollision(Vector2 point);
+	void CheckCollision(Vector2 point);
 
 	void SetText(std::string mesage);
 };
