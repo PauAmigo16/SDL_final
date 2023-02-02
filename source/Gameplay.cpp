@@ -540,7 +540,8 @@ void Gameplay::Render()
 
 void Gameplay::OnEnter()
 {
-	AM->PlayMusic("GameplayMusic");
+	if(AM->IsMuted())
+		AM->PlayMusic("GameplayMusic");
 
 	//TODO put max score here so it prints
 	text->SetText("Max Score: " );

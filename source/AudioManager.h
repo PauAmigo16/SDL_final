@@ -29,5 +29,7 @@ public:
 
 	void MuteAudio();
 
+	bool IsMuted();
+
 	void SetAudio();
 };
