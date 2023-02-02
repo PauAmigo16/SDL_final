@@ -13,7 +13,7 @@ private:
 
 public:
 	bool InMousePos;
-	bool Pressed;
+	bool isPressed;
 	bool isClicked;
 
 	UIButton(SDL_Rect target, std::string text);

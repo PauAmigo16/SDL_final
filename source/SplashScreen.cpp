@@ -26,32 +26,20 @@ SplashScreen::SplashScreen()
 	}
 
 	title[0]->SetComponents({ 0,0,0 }, 255, 0, { 0,144,16,16 });
-	title[1]->SetComponents({ 0,0,0 }, 255, 0, { 16,144,16,16 });
+	title[1]->SetComponents({ 0,0,0 }, 255, 0, { 16,144,10,16 });
 	title[2]->SetComponents({ 0,0,0 }, 255, 0, { 32,144,16,16 });
 	title[3]->SetComponents({ 0,0,0 }, 255, 0, { 48,144,16,16 });
 	title[4]->SetComponents({ 0,0,0 }, 255, 0, { 48,144,16,16 });
 	title[5]->SetComponents({ 0,0,0 }, 255, 0, { 64,144,16,16 });
-	title[6]->SetComponents({ 0,0,0 }, 255, 0, { 16,144,16,16 });
-
-
-	
-	
+	title[6]->SetComponents({ 0,0,0 }, 255, 0, { 16,144,16,16 });	
 }
 
 void SplashScreen::Update()
 {
-	if (time + 1.5f > TM->GetCurrentTime())
-	{
-		
-	}
-	else
+	if (time + 1.5f < TM->GetCurrentTime())
 	{
 		SM->SetScene("mainMenu");
 	}
-
-
-
-
 }
 
 void SplashScreen::Render()
@@ -61,10 +49,7 @@ void SplashScreen::Render()
 	{
 		title->Render();
 		//enti->Render();
-
 	}
-
-	
 }
 
 void SplashScreen::OnEnter()

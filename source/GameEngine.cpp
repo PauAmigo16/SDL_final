@@ -48,7 +48,7 @@ void GameEngine::Quit() {
 
 
 void GameEngine::Run() {
-	while (!isRunning && !dynamic_cast<MainMenu*>(SM->GetScene("mainMenu"))->exitGame) {
+	while (!isRunning && !dynamic_cast<MainMenu*>(SM->GetScene("mainMenu"))->gameExit) {
 		//HandleEvents();
 		IM->Listen();
 		isRunning = IM->GetQuitEvent();

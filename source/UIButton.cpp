@@ -3,7 +3,7 @@
 UIButton::UIButton(SDL_Rect target, std::string text)
 {
 	InMousePos = false;
-	Pressed = false;
+	isPressed = false;
 	isClicked = false;
 
 	pos = { target.x, target.y, target.w, target.h };
@@ -82,7 +82,7 @@ void UIButton::ComproveCollision(Vector2 point)
 		{
 			if (isClicked)
 			{
-				Pressed = true;
+				isPressed = true;
 				isClicked = false;
 			}
 		}
@@ -93,7 +93,7 @@ void UIButton::ComproveCollision(Vector2 point)
 
 		if (!IM->mousePressed && isClicked)
 		{
-			Pressed = true;
+			isPressed = true;
 			isClicked = false;
 		}
 

@@ -1,18 +1,19 @@
 #pragma once
-#include "Scene.h"
-#include "UIButton.h"
-#include "SceneManager.h"
-#include "AudioManager.h"
-
 #include <unordered_map>
+#include <map>
+#include "Scene.h"
+#include "AudioManager.h"
+#include "SceneManager.h"
+#include "UIButton.h"
+
 class MainMenu :public Scene
 {
 private:
-	std::unordered_map<std::string, UIButton*> buttons;
-	bool audioOn;
+	std::map<std::string, UIButton*> myButton;
+	bool audioIsOn;
 public:
-	bool exitGame;
 	MainMenu();
+	bool gameExit;
 
 	virtual void Update() override;
 	virtual void Render() override;
