@@ -5,7 +5,7 @@ Score::Score()
 	score = 0;
 
 	text = new TextRenderer({255,255,255},255,0,{ (int)(RM->gridX / 12),(int)(RM->gridY / 4),(int)(RM->gridX*3),(int)(RM->gridY/2) }, GetString(score));
-	text->Load("resources/pixelart.ttf");
+	text->Load("resources/myFont.ttf");
 
 	SetTransform(RM->gridX / 3, RM->gridY / 4, RM->gridX/3, RM->gridY/2, 0);
 }

@@ -11,7 +11,7 @@ UIButton::UIButton(SDL_Rect target, std::string text)
 	SetTransform(target.x, target.y, target.w, target.h, 0);
 
 	this->text = new TextRenderer({255,255,255},255,0,{ target.x, target.y, target.w, target.h },text);
-	this->text->Load("resources/pixelart.ttf");
+	this->text->Load("resources/myFont.ttf");
 
 	ImageRenderer* button = new ImageRenderer;
 	button->Load("resources/Button.png");

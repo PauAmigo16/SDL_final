@@ -10,7 +10,7 @@ TimeBar::TimeBar()
 
 	 image->SetPosition({ (transform.GetPosition().x), transform.GetPosition().y });
 	 image->SetScale(transform.GetScale().x, transform.GetScale().y);
-
+	
 	 renderers.push_back(image);
 }
 

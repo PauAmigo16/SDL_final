@@ -8,10 +8,9 @@
 class SplashScreen :public Scene
 {
 private: 
-	float startTime;
-	std::vector<AnimatedImageRenderer*> animaciones;
-	std::vector<ImageRenderer*> title;
-	TextRenderer* text;
+	ImageRenderer* entiLogo;
+	std::vector<ImageRenderer*> frogger;
+	float time=0.0f;
 public:
 	SplashScreen();
 	virtual void Update() override;
