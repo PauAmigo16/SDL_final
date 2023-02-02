@@ -15,11 +15,6 @@ UIPanel::UIPanel(SDL_Rect target, std::string mesage)
 	image->SetPosition({ (transform.GetPosition().x), transform.GetPosition().y });
 	image->SetScale(transform.GetScale().x, transform.GetScale().y);
 	renderers.push_back(image);
-
-}
-
-void UIPanel::Update()
-{
 }
 
 void UIPanel::Render()
@@ -47,7 +42,6 @@ void UIPanel::ComproveButtonCol(Vector2 point)
 	for (auto button : buttons)
 	{
 		button.second->ComproveCollision(point);
-		
 	}
 }
 
@@ -56,13 +50,11 @@ void UIPanel::StopPress()
 	for (auto button : buttons)
 	{
 		button.second->Pressed = false;
-
 	}
 }
 
 bool UIPanel::ComproveIfButtonPresed(std::string name)
 {
-
 	return buttons.find(name)->second->Pressed;
 }
 

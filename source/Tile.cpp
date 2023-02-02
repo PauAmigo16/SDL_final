@@ -6,10 +6,6 @@ Tile::Tile()
 	water = false;
 }
 
-void Tile::Update()
-{
-}
-
 void Tile::Render()
 {
 	for (auto render : renderers)

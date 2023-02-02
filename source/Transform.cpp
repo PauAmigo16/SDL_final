@@ -1,17 +1,5 @@
 #include "Transform.h"
 
-Transform::Transform()
-{
-}
-
-Transform::Transform(Vector2 position, Vector2 scale, float rotation)
-{
-	this->position = position;
-	this->scale = scale;
-	this->rotation = rotation;
-
-}
-
 void Transform::SetTransform(float x, float y, float w, float h, float rotation)
 {
 	this->position.x = x;
@@ -40,11 +28,5 @@ float Transform::GetRotation()
 
 void Transform::SetPosition(Vector2 p)
 {
-	position.x = p.x;
-	position.y = p.y;
-}
-
-Transform::~Transform()
-{
-
+	position = p;
 }

@@ -1,15 +1,8 @@
 #include "Spawner.h"
 
-
-
-
-
-Spawner::Spawner(std::string id, int maxSpawnTime, int minSpawnTime, float startPositionX, float startPositionY, int startVelocityX, int startVelocityY, bool pos)
+Spawner::Spawner(std::string id, int maxSpawnTime, int minSpawnTime, float startPositionX, float startPositionY, int startVelocityX, int startVelocityY, bool pos) 
+	: id(id), maxSpawnTime(maxSpawnTime), minSpawnTime(minSpawnTime),pos(pos)
 {
-	this->id = id;
-
-	this->maxSpawnTime = maxSpawnTime;
-	this->minSpawnTime = minSpawnTime;
 
 	this->startPosition.x = startPositionX;
 	this->startPosition.y = startPositionY;
@@ -20,73 +13,44 @@ Spawner::Spawner(std::string id, int maxSpawnTime, int minSpawnTime, float start
 	this->maxLenght = maxLenght;
 	this->minLenght = minLenght;
 
-	this->pos = pos;
-
-
-	elapsedTime = 0;
 	spawnTime =  minSpawnTime + ((((float)rand()) / (float)RAND_MAX)*(maxSpawnTime- minSpawnTime));
 
 	if (pos)
 	{
 		startVelocity.x = -startVelocity.x;
-
 	}
+
 	rotation = 0;
 }
 
 Spawner::Spawner(std::string id, int maxSpawnTime, int minSpawnTime, float startPositionX, float startPositionY, int startVelocityX, int startVelocityY, int maxLenght, int minLenght, bool pos, int hazardChance)
+	: id(id), maxSpawnTime(maxSpawnTime), minSpawnTime(minSpawnTime), maxLenght(maxLenght), minLenght(minLenght), pos(pos), hazardChance(hazardChance)
 {
-	this->id = id;
-
-	this->maxSpawnTime = maxSpawnTime;
-	this->minSpawnTime = minSpawnTime;
-
 	this->startPosition.x = startPositionX;
 	this->startPosition.y = startPositionY;
 
 	this->startVelocity.x = startVelocityX;
 	this->startVelocity.y = startVelocityY;
 
-	this->maxLenght = maxLenght;
-	this->minLenght = minLenght;
-
-	this->pos = pos;
-
-	this->hazardChance = hazardChance;
-
-	elapsedTime = 0;
 	spawnTime = minSpawnTime + ((((float)rand()) / (float)RAND_MAX) * (maxSpawnTime - minSpawnTime));
 
 	if (pos)
 	{
 		startVelocity.x = -startVelocity.x;
-
 	}
+
 	rotation = 0;
 }
 
 Spawner::Spawner(std::string id, int maxSpawnTime, int minSpawnTime, float startPositionX, float startPositionY, int startVelocityX, int startVelocityY, int maxLenght, int minLenght, bool pos, int hazardChance, int snakeChance)
+	: id(id), maxSpawnTime(maxSpawnTime), minSpawnTime(minSpawnTime), maxLenght(maxLenght), minLenght(minLenght), pos(pos), hazardChance(hazardChance), snakeChance(snakeChance)
 {
-	this->id = id;
-
-	this->maxSpawnTime = maxSpawnTime;
-	this->minSpawnTime = minSpawnTime;
-
 	this->startPosition.x = startPositionX;
 	this->startPosition.y = startPositionY;
 
 	this->startVelocity.x = startVelocityX;
 	this->startVelocity.y = startVelocityY;
 
-	this->maxLenght = maxLenght;
-	this->minLenght = minLenght;	
-
-	this->pos = pos;
-
-	this->hazardChance = hazardChance;
-	this->snakeChance = snakeChance;
-
-	elapsedTime = 0;
 	spawnTime = minSpawnTime + ((((float)rand()) / (float)RAND_MAX) * (maxSpawnTime - minSpawnTime));
 
 	if (pos)
@@ -94,18 +58,19 @@ Spawner::Spawner(std::string id, int maxSpawnTime, int minSpawnTime, float start
 		startVelocity.x = -startVelocity.x;
 
 	}
+
 	rotation = 0;
 }
 
 bool Spawner::Update()
 {
-
 	if (TM->GetCurrentTime() > (elapsedTime+spawnTime))
 	{
 		spawnTime = minSpawnTime + ((((float)rand()) / (float)RAND_MAX) * (maxSpawnTime - minSpawnTime));
 		elapsedTime = TM->GetCurrentTime();
 		return true;
 	}
+
 	return false;
 }
 
@@ -116,6 +81,7 @@ void Spawner::GetObject(Gameplay* gameplay)
 		if (rand() % 100 >= hazardChance)
 		{
 			lenght = rand() % minLenght + maxLenght;
+
 			if (pos)
 			{
 				startPosition.x =RM->windowWidht;
@@ -124,6 +90,7 @@ void Spawner::GetObject(Gameplay* gameplay)
 			{
 				startPosition.x = 0 - (lenght * (RM->windowWidht / 14));
 			}
+
 			Log* log = new Log(lenght,startVelocity,startPosition);
 			gameplay->SetObject(log);
 
@@ -131,7 +98,6 @@ void Spawner::GetObject(Gameplay* gameplay)
 			{
 				Snake* snake = new Snake(log->GetTransform().GetPosition().x, log->GetTransform().GetScale().x - ((RM->gridX*1.5f)), 0.5f, startVelocity,log->GetTransform().GetPosition());
 				log->SetObject(snake);
-
 			}
 			else if(rand() % 100 < 30 && gameplay->food == false)
 			{
@@ -151,7 +117,6 @@ void Spawner::GetObject(Gameplay* gameplay)
 
 				Crocodile* crocodile = new Crocodile(startVelocity, startPosition, pos);
 				gameplay->SetObject(crocodile);
-
 			}
 			else
 			{
@@ -162,7 +127,6 @@ void Spawner::GetObject(Gameplay* gameplay)
 				startPosition.x += (2 * RM->gridX);
 				CrocodileMouth* crocodileMouth = new CrocodileMouth(startVelocity, startPosition, pos);
 				gameplay->SetObject(crocodileMouth);
-
 			}
 
 		}
@@ -224,12 +188,10 @@ void Spawner::GetObject(Gameplay* gameplay)
 			if (id == "racing0" || id == "truck0" || id == "family0")
 			{
 				rotation = 0;
-
 			}
 			else
 			{
 				rotation = 180;
-
 			}
 		}
 		else
@@ -238,12 +200,10 @@ void Spawner::GetObject(Gameplay* gameplay)
 			if (id == "racing0" || id == "truck0" || id == "family0")
 			{
 				rotation = 180;
-
 			}
 			else
 			{
 				rotation = 0;
-
 			}
 		}
 		Car* car = new Car(startVelocity, startPosition,id,lenght, rotation);
@@ -252,10 +212,4 @@ void Spawner::GetObject(Gameplay* gameplay)
 
 	}
 	assert(0);
-}
-
-Spawner::Spawner()
-{
-	elapsedTime = 0;
-
 }

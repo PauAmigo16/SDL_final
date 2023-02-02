@@ -236,7 +236,7 @@ void Gameplay::Update()
 								else
 									AM->PlayClip("EndLevel", 0);
 
-								dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(dynamic_cast<TimeBar*>(gameUI.find("timeBar")->second)->GetPerc()*2);
+								dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(dynamic_cast<TimeBar*>(gameUI.find("timeBar")->second)->GetPercentage()*2);
 
 								restartTime();
 								this->position = RM->gridY * 13;
@@ -260,7 +260,7 @@ void Gameplay::Update()
 							}
 							else
 							{		
-								dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(dynamic_cast<TimeBar*>(gameUI.find("timeBar")->second)->GetPerc() * 2);
+								dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(dynamic_cast<TimeBar*>(gameUI.find("timeBar")->second)->GetPercentage() * 2);
 
 								restartTime();
 								this->position = RM->gridY * 13;

@@ -2,9 +2,6 @@
 
 TimeBar::TimeBar()
 {
-
-
-
 	 SetTransform(RM->windowWidht /4, (RM->gridY*14)+ (RM->gridY/4), RM->windowWidht/2, RM->gridY/2, 0);
 
 	 ImageRenderer* image = new ImageRenderer;
@@ -32,8 +29,6 @@ void TimeBar::Render()
 	renderers[0]->Render();
 }
 
-
-
 void TimeBar::SetStartTime(float time)
 {
 	startTime = time;
@@ -45,7 +40,7 @@ void TimeBar::SetMaxTime(float time)
 
 }
 
-int TimeBar::GetPerc()
+int TimeBar::GetPercentage()
 {
 	return (1 -((TM->GetCurrentTime() - startTime) / maxTime))*100;
 }
