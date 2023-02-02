@@ -27,7 +27,7 @@ public:
 	void LoadMusic(std::string audioName);
 	void PlayMusic(std::string audioName);
 
-	void StopAudios();
+	void MuteAudio();
 
 	void SetAudio();
 };

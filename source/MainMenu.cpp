@@ -4,39 +4,37 @@ MainMenu::MainMenu()
 {
 	gameExit = false;
 	audioIsOn = true;
-	UIButton* game = new UIButton({(int)(RM->windowWidht/4),(int)((RM->windowHeight/15)*2), (int)(RM->windowWidht / 2), (int)((RM->windowHeight / 15) * 2) }, "Play");
+	//We create the buttons
+	UIButton* game;
+	UIButton* audio;
+	UIButton* ranking;
+	UIButton* exit;
+
+
+	game = new UIButton({(int)(RM->windowWidht/4),(int)((RM->windowHeight/15)*2), (int)(RM->windowWidht / 2), (int)((RM->windowHeight / 9) * 2) }, "Play");
 	myButton.emplace("game", game);
 
-	UIButton* exit = new UIButton({ (int)(RM->windowWidht / 4),(int)((RM->windowHeight / 15) * 5), (int)(RM->windowWidht / 2), (int)((RM->windowHeight / 15) * 2) }, "Exit");
-	myButton.emplace("exit", exit);
-
-	UIButton* ranking = new UIButton({ (int)(RM->windowWidht / 4),(int)((RM->windowHeight / 15) * 8), (int)(RM->windowWidht / 2), (int)((RM->windowHeight / 15) * 2) }, "Ranking");
+	audio = new UIButton({ (int)(RM->windowWidht / 4),(int)((RM->windowHeight / 15) * 5), (int)(RM->windowWidht / 2), (int)((RM->windowHeight / 9) * 2) }, "Audio On");
+	myButton.emplace("audio", audio);
+	
+	ranking = new UIButton({ (int)(RM->windowWidht / 4),(int)((RM->windowHeight / 15) * 8), (int)(RM->windowWidht / 2), (int)((RM->windowHeight / 9) * 2) }, "Ranking");
 	myButton.emplace("ranking", ranking);
 
-	UIButton* audio = new UIButton({ (int)(RM->windowWidht / 4),(int)((RM->windowHeight / 15) * 11), (int)(RM->windowWidht / 2), (int)((RM->windowHeight / 15) * 2) }, "Audio On");
-	myButton.emplace("audio", audio);
-
+	exit = new UIButton({ (int)(RM->windowWidht / 4),(int)((RM->windowHeight / 15) * 11), (int)(RM->windowWidht / 2), (int)((RM->windowHeight / 9) * 2) }, "Exit");
+	myButton.emplace("exit", exit);
 }
 
 void MainMenu::Update()
 {
 	for (auto button : myButton)
 	{
-		button.second->ComproveCollision({ (float)IM->GetMouseX(),(float)IM->GetMouseY() });
+		button.second->CheckCollision({(float)IM->GetMouseX(),(float)IM->GetMouseY() });
 	}
 	if (myButton.find("game")->second->isPressed)
 	{
+		//Initialize the game
 		SM->SetScene("Gameplay");
-
-
 		myButton.find("game")->second->isPressed = false;
-	}
-	else if (myButton.find("exit")->second->isPressed)
-	{
-		gameExit = true;
-
-
-		myButton.find("exit")->second->isPressed = false;
 	}
 	else if (myButton.find("ranking")->second->isPressed)
 	{
@@ -54,11 +52,15 @@ void MainMenu::Update()
 		else
 		{
 			myButton.find("audio")->second->SetText("Audio Off");
-			AM->SetAudio();
-
+			AM->MuteAudio();
 		}
 
 		myButton.find("audio")->second->isPressed = false;
+	}
+	else if (myButton.find("exit")->second->isPressed)
+	{
+		gameExit = true;
+		myButton.find("exit")->second->isPressed = false;
 	}
 }
 
@@ -77,5 +79,5 @@ void MainMenu::OnEnter()
 
 void MainMenu::OnExit()
 {
-	AM->StopAudios();
+	AM->MuteAudio();
 }

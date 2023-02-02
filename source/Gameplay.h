@@ -16,10 +16,14 @@
 #include<map>
 
 class Spawner;
+
 class Gameplay :public Scene {
 private:
+enum GameState{
+	GAMEPLAY,PAUSE,DEAD,MAPEND}
+states;
+
 	TextRenderer* text;
-	enum States{GAMEPLAY,PAUSE,DEATH,REACHEND}states;
 	void SaveScore();
 	void LoadLevelFromFile(std::string path);
 	float endHazardTimer;
@@ -29,6 +33,7 @@ private:
 	bool lostLive;
 	bool death;
 	float reachEndTime;
+
 public:		
 	float levelMaxTime;
 	float endHazardChances;

@@ -41,7 +41,7 @@ void UIPanel::ComproveButtonCol(Vector2 point)
 {
 	for (auto button : buttons)
 	{
-		button.second->ComproveCollision(point);
+		button.second->CheckCollision(point);
 	}
 }
 

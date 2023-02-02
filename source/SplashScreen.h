@@ -14,7 +14,8 @@ private:
 
 public:
 	SplashScreen();
-
+	void FrogRender();
+	void EntiRender();
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual void OnEnter() override {}

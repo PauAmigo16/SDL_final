@@ -68,7 +68,7 @@ void UIButton::Render()
 
 }
 
-void UIButton::ComproveCollision(Vector2 point)
+void UIButton::CheckCollision(Vector2 point)
 {
 	if (boundingBox.CheckOverlappingPoint(point))
 	{
