@@ -99,6 +99,7 @@ void Gameplay::Update()
 		{
 			TM->PauseGame(true);
 			states = GameState::PAUSE;
+			AM->ToggleAudio();
 			break;
 		}
 
@@ -376,6 +377,7 @@ void Gameplay::Update()
 		if (dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->ComproveIfButtonPresed("restart"))
 		{
 			TM->PauseGame(false);
+			AM->ToggleAudio();
 			states = GameState::GAMEPLAY;
 			dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->StopPress();
 		}
@@ -385,6 +387,8 @@ void Gameplay::Update()
 
 			player->returnGame();
 			TM->PauseGame(false);
+			AM->ToggleAudio();
+
 
 			SM->SetScene("mainMenu");
 			states = GameState::GAMEPLAY;
