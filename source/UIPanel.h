@@ -19,9 +19,9 @@ public:
 	virtual void Render() override;
 
 	void AddButton(SDL_Rect target, std::string name,std::string text);
-	void ComproveButtonCol(Vector2 point);
+	void CheckButtonCollision(Vector2 point);
 
 	void StopPress();
-	bool ComproveIfButtonPresed(std::string name);
+	bool CheckIfButtonPresed(std::string name);
 };
 

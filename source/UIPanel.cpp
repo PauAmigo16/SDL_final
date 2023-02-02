@@ -37,7 +37,7 @@ void UIPanel::AddButton(SDL_Rect target, std::string name, std::string text)
 	buttons.emplace(name, newButton);
 }
 
-void UIPanel::ComproveButtonCol(Vector2 point)
+void UIPanel::CheckButtonCollision(Vector2 point)
 {
 	for (auto button : buttons)
 	{
@@ -53,7 +53,7 @@ void UIPanel::StopPress()
 	}
 }
 
-bool UIPanel::ComproveIfButtonPresed(std::string name)
+bool UIPanel::CheckIfButtonPresed(std::string name)
 {
 	return buttons.find(name)->second->isPressed;
 }

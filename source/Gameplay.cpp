@@ -83,6 +83,7 @@ void Gameplay::Update()
 {
 	int endPosition = 0;
 	bool isWater = false;
+
 	for (auto pos : endPositions)
 	{
 		if (!pos->frog)
@@ -98,15 +99,9 @@ void Gameplay::Update()
 		if (IM->CheckKeyState(SDLK_ESCAPE, PRESSED))
 		{
 			TM->PauseGame(true);
-			states = GameState::PAUSE;
 			AM->ToggleAudio();
+			states = GameState::PAUSE;
 			break;
-		}
-
-		if (player->GetTransform().GetPosition().y == position - RM->gridY && !player->IsDead())
-		{
-			position = player->GetTransform().GetPosition().y;
-			dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(10);
 		}
 
 		if (currentLevelTime + levelMaxTime < TM->GetCurrentTime())
@@ -118,10 +113,12 @@ void Gameplay::Update()
 			states = GameState::DEAD;
 		}
 
-		for (auto UI : gameUI)
+		if (player->GetTransform().GetPosition().y == position - RM->gridY && !player->IsDead())
 		{
-			UI.second->Update();
+			position = player->GetTransform().GetPosition().y;
+			dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(10);
 		}
+
 
 		if (endHazardTimer + 4 < TM->GetCurrentTime())
 		{
@@ -161,6 +158,11 @@ void Gameplay::Update()
 
 			}
 
+		}
+
+		for (auto UI : gameUI)
+		{
+			UI.second->Update();
 		}
 
 		for (auto pos : endPositions)
@@ -363,16 +365,16 @@ void Gameplay::Update()
 		}
 		break;
 	case Gameplay::PAUSE:
-		dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->ComproveButtonCol({ (float)IM->GetMouseX(),(float)IM->GetMouseY() });
+		dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->CheckButtonCollision({ (float)IM->GetMouseX(),(float)IM->GetMouseY() });
 
-		if (dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->ComproveIfButtonPresed("restart"))
+		if (dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->CheckIfButtonPresed("restart"))
 		{
 			TM->PauseGame(false);
 			AM->ToggleAudio();
 			states = GameState::GAMEPLAY;
 			dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->StopPress();
 		}
-		else if (dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->ComproveIfButtonPresed("exit"))
+		else if (dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->CheckIfButtonPresed("exit"))
 		{
 			this->position = RM->gridY * 13;
 
@@ -394,19 +396,11 @@ void Gameplay::Update()
 	case Gameplay::DEAD:
 		player->Update();
 
-		if (!death)
+		if (death)
 		{
-			if (player->IsDead() == false)
-			{
-				TM->PauseGame(false);
-				states = GameState::GAMEPLAY;
-			}
-		}
-		else
-		{
-			dynamic_cast<UIPanel*>(gameUI.find("gameOver")->second)->ComproveButtonCol({ (float)IM->GetMouseX(),(float)IM->GetMouseY() });
+			dynamic_cast<UIPanel*>(gameUI.find("gameOver")->second)->CheckButtonCollision({ (float)IM->GetMouseX(),(float)IM->GetMouseY() });
 
-			if (dynamic_cast<UIPanel*>(gameUI.find("gameOver")->second)->ComproveIfButtonPresed("returnGame"))
+			if (dynamic_cast<UIPanel*>(gameUI.find("gameOver")->second)->CheckIfButtonPresed("returnGame"))
 			{
 				TM->PauseGame(false);
 				player->returnGame();
@@ -415,7 +409,7 @@ void Gameplay::Update()
 				dynamic_cast<UIPanel*>(gameUI.find("gameOver")->second)->StopPress();
 			}
 
-			if (dynamic_cast<UIPanel*>(gameUI.find("gameOver")->second)->ComproveIfButtonPresed("returnMenu"))
+			if (dynamic_cast<UIPanel*>(gameUI.find("gameOver")->second)->CheckIfButtonPresed("returnMenu"))
 			{
 				TM->PauseGame(false);
 
@@ -430,20 +424,30 @@ void Gameplay::Update()
 				dynamic_cast<Score*>(gameUI.find("score")->second)->SetScore(0);
 			}
 		}
+		else
+		{
+			if (player->IsDead() == false)
+			{
+				TM->PauseGame(false);
+				states = GameState::GAMEPLAY;
+			}
+		}
 		break;
 
 	case Gameplay::MAPEND:
 		if (reachEndTime + 2 < TM->GetCurrentTimeInPause())
 		{
-			if (endPosition != 0)
-				states = GameState::GAMEPLAY;
-			else
+			if (endPosition == 0)
 			{
 				OnExit();
 
 				level += 1;
 
 				OnEnter();
+				states = GameState::GAMEPLAY;
+			}
+			else
+			{
 				states = GameState::GAMEPLAY;
 			}
 
