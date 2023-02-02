@@ -18,56 +18,55 @@ Gameplay::Gameplay()
 	Lives* lives = new Lives();
 	gameUI.emplace("lives", lives);
 
-	text = new TextRenderer({ 255,255,255 }, 255, 0, { (int)((RM->windowWidht/8)*3), (int)(RM->gridY / 4), (int)((RM->windowWidht / 8) * 2), (int)(RM->gridY/2) }, "Max Score");
+	text = new TextRenderer({ 255,255,255 }, 255, 0, { (int)((RM->windowWidht / 8) * 3), (int)(RM->gridY / 4), (int)((RM->windowWidht / 8) * 2), (int)(RM->gridY / 2) }, "Max Score");
 	text->Load("resources/myFont.ttf");
 
-
-	position = RM->gridY*13;
+	position = RM->gridY * 13;
 
 	lostLive = true;
 
 	UIPanel* gameOver = new UIPanel({
-		(int)(RM->windowWidht/4),
-		(int)(RM->windowHeight/4),
-		(int)(RM->windowWidht/2),
-		(int)(RM->windowHeight/2) 
+		(int)(RM->windowWidht / 4),
+		(int)(RM->windowHeight / 4),
+		(int)(RM->windowWidht / 2),
+		(int)(RM->windowHeight / 2)
 		}, "GAME OVER");
 
-	gameOver->AddButton({ 
-		(int)gameOver->transform.GetPosition().x+((int)gameOver->transform.GetScale().x/4),
-		(int)gameOver->transform.GetPosition().y+(int)((gameOver->transform.GetScale().y/4)*2),
-		(int)gameOver->transform.GetScale().x/2, 
-		(int)gameOver->transform.GetScale().y/6 
+	gameOver->AddButton({
+		(int)gameOver->transform.GetPosition().x + ((int)gameOver->transform.GetScale().x / 4),
+		(int)gameOver->transform.GetPosition().y + (int)((gameOver->transform.GetScale().y / 4) * 2),
+		(int)gameOver->transform.GetScale().x / 2,
+		(int)gameOver->transform.GetScale().y / 6
 		}, "returnGame", "Reload");
 
-	gameOver->AddButton({ 
-		(int)gameOver->transform.GetPosition().x + ((int)gameOver->transform.GetScale().x/4),
-		(int)gameOver->transform.GetPosition().y + (int)((gameOver->transform.GetScale().y/4)*3),
-		(int)gameOver->transform.GetScale().x/2, 
-		(int)gameOver->transform.GetScale().y/6 
+	gameOver->AddButton({
+		(int)gameOver->transform.GetPosition().x + ((int)gameOver->transform.GetScale().x / 4),
+		(int)gameOver->transform.GetPosition().y + (int)((gameOver->transform.GetScale().y / 4) * 3),
+		(int)gameOver->transform.GetScale().x / 2,
+		(int)gameOver->transform.GetScale().y / 6
 		}, "returnMenu", "Exit");
 
 	gameUI.emplace("gameOver", gameOver);
 
-	UIPanel* pause = new UIPanel({ 
-		(int)(RM->windowWidht/4),
-		(int)(RM->windowHeight/4),
-		(int)(RM->windowWidht/2),
-		(int)(RM->windowHeight/2)
+	UIPanel* pause = new UIPanel({
+		(int)(RM->windowWidht / 4),
+		(int)(RM->windowHeight / 4),
+		(int)(RM->windowWidht / 2),
+		(int)(RM->windowHeight / 2)
 		}, "Pause");
 
-	pause->AddButton({ 
-		(int)pause->transform.GetPosition().x + ((int)pause->transform.GetScale().x/4),
-		(int)pause->transform.GetPosition().y + (int)((pause->transform.GetScale().y/4)*2),
-		(int)pause->transform.GetScale().x/2, 
-		(int)pause->transform.GetScale().y/6 
+	pause->AddButton({
+		(int)pause->transform.GetPosition().x + ((int)pause->transform.GetScale().x / 4),
+		(int)pause->transform.GetPosition().y + (int)((pause->transform.GetScale().y / 4) * 2),
+		(int)pause->transform.GetScale().x / 2,
+		(int)pause->transform.GetScale().y / 6
 		}, "restart", "Restart");
 
-	pause->AddButton({ 
-		(int)pause->transform.GetPosition().x + ((int)pause->transform.GetScale().x/4),
-		(int)pause->transform.GetPosition().y + (int)((pause->transform.GetScale().y/4)*3),
-		(int)pause->transform.GetScale().x/2, 
-		(int)pause->transform.GetScale().y/6 }, 
+	pause->AddButton({
+		(int)pause->transform.GetPosition().x + ((int)pause->transform.GetScale().x / 4),
+		(int)pause->transform.GetPosition().y + (int)((pause->transform.GetScale().y / 4) * 3),
+		(int)pause->transform.GetScale().x / 2,
+		(int)pause->transform.GetScale().y / 6 },
 		"exit", "Exit");
 
 	gameUI.emplace("Pause", pause);
@@ -75,7 +74,7 @@ Gameplay::Gameplay()
 }
 void Gameplay::LoadLevelFromFile(std::string path)
 {
-	LevelLoader::LoadLevel(path,this);
+	LevelLoader::LoadLevel(path, this);
 }
 void Gameplay::SaveScore()
 {
@@ -84,13 +83,13 @@ void Gameplay::Update()
 {
 	int endPosition = 0;
 	bool isWater = false;
-		for (auto pos : endPositions)
+	for (auto pos : endPositions)
+	{
+		if (!pos->frog)
 		{
-			if (!pos->frog)
-			{
-				endPosition++;
-			}
+			endPosition++;
 		}
+	}
 
 	switch (states)
 	{
@@ -108,7 +107,7 @@ void Gameplay::Update()
 			position = player->GetTransform().GetPosition().y;
 			dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(10);
 		}
-	
+
 		if (currentLevelTime + levelMaxTime < TM->GetCurrentTime())
 		{
 			player->Respawn();
@@ -124,8 +123,6 @@ void Gameplay::Update()
 			UI.second->Update();
 		}
 
-
-		//Cada 4 segundos enviar un evento a una posicion aleatoria del final
 		if (endHazardTimer + 4 < TM->GetCurrentTime())
 		{
 			endHazardTimer = TM->GetCurrentTime();
@@ -159,42 +156,34 @@ void Gameplay::Update()
 				}
 
 			}
-			else if(!fly&& endPositions[pos]->addCrocodile == false)
+			else if (!fly && endPositions[pos]->addCrocodile == false)
 			{
 				endPositions[pos]->addFly = true;
 				endPositions[pos]->ActiveAnimatios();
 
 			}
-	
+
 		}
 
-
-		//Actualizar las posiciones del final para spawnear una mosca o un cocodrilo
 		for (auto pos : endPositions)
 		{
 			pos->Update();
 		}
 
 
-	
-		for (auto spawns : spawners) {
 
-			//Comprobar si toca spawnear un objeto
+		for (auto spawns : spawners) {
 			if (spawns->Update())
 			{
-			spawns->GetObject(this);
+				spawns->GetObject(this);
 			}
-
-
 		}
 
-		//Comprobar si el objeto a salido de pantalla
-		for (int i = 0; i < objects.size();i++) {
+		for (int i = 0; i < objects.size(); i++) {
 
 			objects[i]->Update();
 			if ((objects[i]->GetTransform().GetPosition().x < -(objects[i]->GetTransform().GetScale().x) || objects[i]->GetTransform().GetPosition().x > RM->windowWidht))
 			{
-				//Si el objeto tenia comida, actualizar la escena para que sepa que no hay comida en pantalla y pueda spawnear una
 				if (objects[i]->IsFood())
 				{
 					food = false;
@@ -203,89 +192,82 @@ void Gameplay::Update()
 				delete objects[i];
 				objects.erase(objects.begin() + i);
 				i--;
-
 			}
-
-		}	
+		}
 		player->Update();
 
+		lostLive = true;
 
-			lostLive = true;
-
-			for (int i = 0; i < endPositions.size();i++)
+		for (int i = 0; i < endPositions.size(); i++)
+		{
+			if (endPositions[i]->boundingBox.CheckOverlappingAABB(&player->boundingBox))
 			{
-						if (endPositions[i]->boundingBox.CheckOverlappingAABB(&player->boundingBox))
-						{
-							if (endPositions[i]->lethal)
-							{
-								TM->PauseGame(true);
-								states = GameState::DEAD;
-								player->Respawn();
-								if (player->haveFood())
-									food = false;
-							}
-							else if (endPositions[i]->addFly)
-							{
-								if (endPosition != 1)
-									AM->PlayClip("ReachEnd", 0);
-								else
-									AM->PlayClip("EndLevel", 0);
+				if (endPositions[i]->lethal)
+				{
+					TM->PauseGame(true);
+					states = GameState::DEAD;
+					player->Respawn();
+					if (player->haveFood())
+						food = false;
+				}
+				else if (endPositions[i]->addFly)
+				{
+					if (endPosition != 1)
+						AM->PlayClip("ReachEnd", 0);
+					else
+						AM->PlayClip("EndLevel", 0);
 
-								dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(dynamic_cast<TimeBar*>(gameUI.find("timeBar")->second)->GetPercentage()*2);
+					dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(dynamic_cast<TimeBar*>(gameUI.find("timeBar")->second)->GetPercentage() * 2);
 
-								restartTime();
-								this->position = RM->gridY * 13;
+					restartTime();
+					this->position = RM->gridY * 13;
 
-								endPositions[i]->addFly = false;
-								endPositions[i]->frog = true;
-								if (player->haveFood())
-								{
-									food = false;
-									dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(200);
-								}
-								else
-								{
-									dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(100);
+					endPositions[i]->addFly = false;
+					endPositions[i]->frog = true;
+					if (player->haveFood())
+					{
+						food = false;
+						dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(200);
+					}
+					else
+					{
+						dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(100);
 
-								}
-								TM->PauseGame(true);
-								states = GameState::MAPEND;
-								reachEndTime = TM->GetCurrentTimeInPause();
+					}
+					TM->PauseGame(true);
+					states = GameState::MAPEND;
+					reachEndTime = TM->GetCurrentTimeInPause();
 
-							}
-							else
-							{		
-								dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(dynamic_cast<TimeBar*>(gameUI.find("timeBar")->second)->GetPercentage() * 2);
+				}
+				else
+				{
+					dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(dynamic_cast<TimeBar*>(gameUI.find("timeBar")->second)->GetPercentage() * 2);
 
-								restartTime();
-								this->position = RM->gridY * 13;
+					restartTime();
+					this->position = RM->gridY * 13;
 
-								endPositions[i]->frog = true;
-								if (player->haveFood())
-								{
-									food = false;
-									dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(100);
+					endPositions[i]->frog = true;
+					if (player->haveFood())
+					{
+						food = false;
+						dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(100);
 
-								}
-								TM->PauseGame(true);
-								states = GameState::MAPEND;
-								reachEndTime = TM->GetCurrentTimeInPause();
+					}
+					TM->PauseGame(true);
+					states = GameState::MAPEND;
+					reachEndTime = TM->GetCurrentTimeInPause();
 
-								if (endPosition != 1)
-									AM->PlayClip("ReachEnd", 0);
-								else
-									AM->PlayClip("EndLevel", 0);
-							}
-						}
+					if (endPosition != 1)
+						AM->PlayClip("ReachEnd", 0);
+					else
+						AM->PlayClip("EndLevel", 0);
+				}
 			}
+		}
 
 
-
-
-		
 		if (!player->IsMoving() && !player->IsDead())
 		{
-		
 
 			bool objectFound = false;
 			for (auto object : objects) {
@@ -313,7 +295,7 @@ void Gameplay::Update()
 						{
 							objectFound = true;
 							if (object->GetObject()->lethal)
-							{			
+							{
 								if (player->haveFood())
 									food = false;
 								player->Respawn();
@@ -357,7 +339,7 @@ void Gameplay::Update()
 				}
 			}
 		}
-		
+
 		if (player->IsDead())
 		{
 			restartTime();
@@ -378,7 +360,7 @@ void Gameplay::Update()
 				}
 				else
 				{
-					if(isWater)
+					if (isWater)
 						AM->PlayClip("Water", 0);
 					else
 						AM->PlayClip("Dead", 0);
@@ -412,21 +394,17 @@ void Gameplay::Update()
 
 			dynamic_cast<Lives*>(gameUI.find("lives")->second)->SetLives(3);
 			dynamic_cast<Score*>(gameUI.find("score")->second)->SetScore(0);
-
 		}
-
 		break;
 	case Gameplay::DEAD:
 		player->Update();
 
 		if (!death)
 		{
-
-		    if (player->IsDead() == false)
+			if (player->IsDead() == false)
 			{
 				TM->PauseGame(false);
 				states = GameState::GAMEPLAY;
-
 			}
 		}
 		else
@@ -440,13 +418,12 @@ void Gameplay::Update()
 				states = GameState::GAMEPLAY;
 				RestartLevel();
 				dynamic_cast<UIPanel*>(gameUI.find("gameOver")->second)->StopPress();
-
 			}
 
 			if (dynamic_cast<UIPanel*>(gameUI.find("gameOver")->second)->ComproveIfButtonPresed("returnMenu"))
 			{
 				TM->PauseGame(false);
-				
+
 				SM->SetScene("mainMenu");
 				states = GameState::GAMEPLAY;
 
@@ -458,48 +435,40 @@ void Gameplay::Update()
 				dynamic_cast<Score*>(gameUI.find("score")->second)->SetScore(0);
 			}
 		}
-	
 
 		break;
 	case Gameplay::MAPEND:
 		if (reachEndTime + 2 < TM->GetCurrentTimeInPause())
 		{
-			if(endPosition != 0)
+			if (endPosition != 0)
 				states = GameState::GAMEPLAY;
 			else
 			{
-
 				OnExit();
 
 				level += 1;
 
 				OnEnter();
 				states = GameState::GAMEPLAY;
-
 			}
+
 			TM->PauseGame(false);
 			player->end();
-
 		}
-
-
-		break;
-	default:
 		break;
 	}
-
 }
 
 void Gameplay::Render()
 {
-	for (auto tile : tiles) 
+	for (auto tile : tiles)
 	{
 		tile->Render();
 	}
-	for (auto object : objects) 
+	for (auto object : objects)
 	{
-		if(object != nullptr)
-		object->Render();
+		if (object != nullptr)
+			object->Render();
 	}
 	for (auto pos : endPositions)
 	{
@@ -507,8 +476,8 @@ void Gameplay::Render()
 	}
 	for (auto UI : gameUI)
 	{
-		if(UI.first != "gameOver" && UI.first != "Pause")
-		UI.second->Render();
+		if (UI.first != "gameOver" && UI.first != "Pause")
+			UI.second->Render();
 	}
 
 	text->Render();
@@ -533,8 +502,6 @@ void Gameplay::Render()
 			dynamic_cast<UIPanel*>(gameUI.find("gameOver")->second)->Render();
 		}
 		break;
-	default:
-		break;
 	}
 }
 
@@ -543,7 +510,7 @@ void Gameplay::OnEnter()
 	AM->PlayMusic("GameplayMusic");
 
 	//TODO put max score here so it prints
-	text->SetText("Max Score: " );
+	text->SetText("Max Score: ");
 
 	if (level == 1)
 	{
@@ -575,9 +542,7 @@ void Gameplay::OnEnter()
 void Gameplay::OnExit()
 {
 	for (int i = tiles.size() - 1; i >= 0; i--) {
-
 		delete tiles[i];
-
 	}
 	for (auto object : objects) {
 		delete object;
@@ -600,8 +565,8 @@ void Gameplay::OnExit()
 
 void Gameplay::SetObject(Object* object)
 {
-	if(object != nullptr)
-	objects.push_back(object);
+	if (object != nullptr)
+		objects.push_back(object);
 }
 
 void Gameplay::restartTime()
