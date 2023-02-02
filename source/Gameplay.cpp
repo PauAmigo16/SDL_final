@@ -96,7 +96,7 @@ void Gameplay::Update()
 	{
 	case Gameplay::GAMEPLAY:
 
-		if (IM->CheckKeyState(SDLK_p, PRESSED))
+		if (IM->CheckKeyState(SDLK_ESCAPE, PRESSED))
 		{
 			TM->PauseGame(true);
 			states = GameState::PAUSE;

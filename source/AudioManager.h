@@ -29,7 +29,5 @@ public:
 
 	void MuteAudio();
 
-	bool IsMuted();
-
 	void ToggleAudio();
 };
