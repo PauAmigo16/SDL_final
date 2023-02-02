@@ -103,6 +103,7 @@
     <Image Include="resources\Button.png" />
     <Image Include="resources\ButtonPressed.png" />
     <Image Include="resources\GameOverPanel.png" />
+    <Image Include="resources\logo-enti.png" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="resources\sample_level.xml" />
