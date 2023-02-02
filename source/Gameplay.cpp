@@ -209,7 +209,7 @@ void Gameplay::Update()
 				else if (endPositions[i]->addFly)
 				{
 					if (endPosition != 1)
-						AM->PlayClip("ReachEnd", 0);
+						AM->PlayClip("EndTile", 0);
 					else
 						AM->PlayClip("EndLevel", 0);
 
@@ -254,7 +254,7 @@ void Gameplay::Update()
 					reachEndTime = TM->GetCurrentTimeInPause();
 
 					if (endPosition != 1)
-						AM->PlayClip("ReachEnd", 0);
+						AM->PlayClip("EndTile", 0);
 					else
 						AM->PlayClip("EndLevel", 0);
 				}
@@ -346,7 +346,8 @@ void Gameplay::Update()
 
 				if (dynamic_cast<Lives*>(gameUI.find("lives")->second)->GetLives() == -1)
 				{
-					AM->PlayClip("LostAllLives", 0);
+					AM->MuteAudio();
+					AM->PlayClip("GameOver", 0);
 
 					death = true;
 					return;

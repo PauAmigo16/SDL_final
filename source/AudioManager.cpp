@@ -9,8 +9,8 @@ AudioManager::AudioManager()
 	LoadClip("Dead");
 	LoadClip("EndLevel");
 	LoadClip("Jump");
-	LoadClip("LostAllLives");
-	LoadClip("ReachEnd");
+	LoadClip("GameOver");
+	LoadClip("EndTile");
 	LoadClip("Water");
 	LoadMusic("GameplayMusic");
 	LoadMusic("MenuMusic");
