@@ -6,7 +6,7 @@ Gameplay::Gameplay()
 	states = GameState::GAMEPLAY;
 	level = 1;
 	player = new Frog();
-	food = false;
+	playerFood = false;
 	endHazardTimer = TM->GetCurrentTime();
 	reachEndTime = 0;
 	death = false;
@@ -108,7 +108,7 @@ void Gameplay::Update()
 		{
 			player->Respawn();
 			if (player->haveFood())
-				food = false;
+				playerFood = false;
 
 			states = GameState::DEAD;
 		}
@@ -165,17 +165,18 @@ void Gameplay::Update()
 			UI.second->Update();
 		}
 
-		for (auto pos : endPositions)
-		{
-			pos->Update();
-		}
-
 		for (auto spawns : spawners) {
 			if (spawns->Update())
 			{
 				spawns->GetObject(this);
 			}
 		}
+
+		for (auto pos : endPositions)
+		{
+			pos->Update();
+		}
+
 
 		for (int i = 0; i < objects.size(); i++) {
 
@@ -184,7 +185,7 @@ void Gameplay::Update()
 			{
 				if (objects[i]->IsFood())
 				{
-					food = false;
+					playerFood = false;
 				}
 
 				delete objects[i];
@@ -193,8 +194,8 @@ void Gameplay::Update()
 			}
 		}
 		player->Update();
-
 		lostLive = true;
+
 
 		for (int i = 0; i < endPositions.size(); i++)
 		{
@@ -205,8 +206,9 @@ void Gameplay::Update()
 					TM->PauseGame(true);
 					states = GameState::DEAD;
 					player->Respawn();
-					if (player->haveFood())
-						food = false;
+					if (player->haveFood()) {
+						playerFood = false;
+					}
 				}
 				else if (endPositions[i]->addFly)
 				{
@@ -224,7 +226,7 @@ void Gameplay::Update()
 					endPositions[i]->frog = true;
 					if (player->haveFood())
 					{
-						food = false;
+						playerFood = false;
 						dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(200);
 					}
 					else
@@ -247,7 +249,7 @@ void Gameplay::Update()
 					endPositions[i]->frog = true;
 					if (player->haveFood())
 					{
-						food = false;
+						playerFood = false;
 						dynamic_cast<Score*>(gameUI.find("score")->second)->AddScore(100);
 
 					}
@@ -275,7 +277,7 @@ void Gameplay::Update()
 					if (object->lethal)
 					{
 						if (player->haveFood())
-							food = false;
+							playerFood = false;
 
 						player->Respawn();
 						TM->PauseGame(true);
@@ -295,7 +297,7 @@ void Gameplay::Update()
 							if (object->GetObject()->lethal)
 							{
 								if (player->haveFood())
-									food = false;
+									playerFood = false;
 								player->Respawn();
 								TM->PauseGame(true);
 								states = GameState::DEAD;
@@ -324,7 +326,7 @@ void Gameplay::Update()
 							isWater = dynamic_cast<Tile*>(tile)->IsWater();
 
 							if (player->haveFood())
-								food = false;
+								playerFood = false;
 							player->Respawn();
 							TM->PauseGame(true);
 							states = GameState::DEAD;

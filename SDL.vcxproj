@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\GameState.cpp" />
     <ClCompile Include="source\Lives.cpp" />
     <ClCompile Include="source\Score.cpp" />
     <ClCompile Include="source\EndPosition.cpp" />
@@ -59,6 +60,7 @@
     <ClCompile Include="source\TimeBar.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\GameState.h" />
     <ClInclude Include="source\Lives.h" />
     <ClInclude Include="source\Score.h" />
     <ClInclude Include="source\EndPosition.h" />
@@ -107,9 +109,6 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="resources\sample_level.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="resources\pixelart.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="resources\Audio\Dead.wav" />

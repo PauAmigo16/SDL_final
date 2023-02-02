@@ -99,11 +99,11 @@ void Spawner::GetObject(Gameplay* gameplay)
 				Snake* snake = new Snake(log->GetTransform().GetPosition().x, log->GetTransform().GetScale().x - ((RM->gridX*1.5f)), 0.5f, startVelocity,log->GetTransform().GetPosition());
 				log->SetObject(snake);
 			}
-			else if(rand() % 100 < 30 && gameplay->food == false)
+			else if(rand() % 100 < 30 && gameplay->playerFood == false)
 			{
 				Food* food = new Food(log->GetTransform().GetPosition().x, log->GetTransform().GetScale().x - RM->gridX, startVelocity, log->GetTransform().GetPosition());
 				log->SetObject(food);
-				gameplay->food = true;
+				gameplay->playerFood = true;
 				log->SetFood();
 			}
 		}

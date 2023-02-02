@@ -44,7 +44,7 @@ public:
 	std::vector<GameObject*> tiles;
 	Frog *player;
 	int level;
-	bool food;
+	bool playerFood;
 	Gameplay();
 	virtual void Update() override;
 	virtual void Render() override;

@@ -129,6 +129,9 @@
     <ClCompile Include="source\UIPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\GameState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\GameEngine.h">
@@ -242,6 +245,9 @@
     <ClInclude Include="source\UIButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\GameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\Assetsv1.png">
@@ -265,9 +271,6 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="resources\sample_level.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="resources\pixelart.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="resources\Audio\Water.wav">

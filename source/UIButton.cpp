@@ -6,7 +6,10 @@ UIButton::UIButton(SDL_Rect target, std::string text)
 	isClicked = false;
 
 	pos = { target.x, target.y, target.w, target.h };
-	textPos = { (int)((target.x) + (target.w * 0.15f)), (int)((target.y) + (target.h * 0.15f)), (int)((float)target.w * 0.7f), (int)((target.h) * 0.7f) };
+	textPos = { (int)((target.x) + (target.w * 0.15f)), 
+	(int)((target.y) + (target.h * 0.15f)), (int)((float)target.w * 0.7f),
+	(int)((target.h) * 0.7f) };
+
 	SetTransform(target.x, target.y, target.w, target.h, 0);
 
 	this->text = new TextRenderer({ 255,255,255 }, 255, 0, { target.x, target.y, target.w, target.h }, text);
@@ -16,7 +19,6 @@ UIButton::UIButton(SDL_Rect target, std::string text)
 	button->Load("resources/Button.png");
 
 	button->SetComponents({ 0,0,0 }, 255, 0, { 0,11,32,11 });
-
 	button->SetPosition({ (transform.GetPosition().x), transform.GetPosition().y });
 	button->SetScale(transform.GetScale().x, transform.GetScale().y);
 	renderers.push_back(button);
