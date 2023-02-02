@@ -2,74 +2,69 @@
 
 MainMenu::MainMenu()
 {
-	exitGame = false;
-	audioOn = true;
+	gameExit = false;
+	audioIsOn = true;
 	UIButton* game = new UIButton({(int)(RM->windowWidht/4),(int)((RM->windowHeight/15)*2), (int)(RM->windowWidht / 2), (int)((RM->windowHeight / 15) * 2) }, "Play");
-	buttons.emplace("game", game);
+	myButton.emplace("game", game);
 
 	UIButton* exit = new UIButton({ (int)(RM->windowWidht / 4),(int)((RM->windowHeight / 15) * 5), (int)(RM->windowWidht / 2), (int)((RM->windowHeight / 15) * 2) }, "Exit");
-	buttons.emplace("exit", exit);
+	myButton.emplace("exit", exit);
 
 	UIButton* ranking = new UIButton({ (int)(RM->windowWidht / 4),(int)((RM->windowHeight / 15) * 8), (int)(RM->windowWidht / 2), (int)((RM->windowHeight / 15) * 2) }, "Ranking");
-	buttons.emplace("ranking", ranking);
+	myButton.emplace("ranking", ranking);
 
 	UIButton* audio = new UIButton({ (int)(RM->windowWidht / 4),(int)((RM->windowHeight / 15) * 11), (int)(RM->windowWidht / 2), (int)((RM->windowHeight / 15) * 2) }, "Audio On");
-	buttons.emplace("audio", audio);
+	myButton.emplace("audio", audio);
 
 }
 
 void MainMenu::Update()
 {
-	for (auto button : buttons)
+	for (auto button : myButton)
 	{
 		button.second->ComproveCollision({ (float)IM->GetMouseX(),(float)IM->GetMouseY() });
-
-
 	}
-
-	if (buttons.find("game")->second->Pressed)
+	if (myButton.find("game")->second->isPressed)
 	{
 		SM->SetScene("Gameplay");
 
 
-		buttons.find("game")->second->Pressed = false;
+		myButton.find("game")->second->isPressed = false;
 	}
-	else if (buttons.find("exit")->second->Pressed)
+	else if (myButton.find("exit")->second->isPressed)
 	{
-		exitGame = true;
+		gameExit = true;
 
 
-		buttons.find("exit")->second->Pressed = false;
+		myButton.find("exit")->second->isPressed = false;
 	}
-	else if (buttons.find("ranking")->second->Pressed)
+	else if (myButton.find("ranking")->second->isPressed)
 	{
 		//TODO set scene to ranking
 	}
-	else if (buttons.find("audio")->second->Pressed)
+	else if (myButton.find("audio")->second->isPressed)
 	{
-
-		audioOn = !audioOn;
-		if (!audioOn)
+		audioIsOn = !audioIsOn;
+		if (audioIsOn)
 		{
-			buttons.find("audio")->second->SetText("Audio Off");
+			myButton.find("audio")->second->SetText("Audio On");
 			AM->SetAudio();
-
+			AM->PlayMusic("MenuMusic");
 		}
 		else
 		{
-			buttons.find("audio")->second->SetText("Audio On");
+			myButton.find("audio")->second->SetText("Audio Off");
 			AM->SetAudio();
-			AM->PlayMusic("MenuMusic");
 
 		}
 
-		buttons.find("audio")->second->Pressed = false;
+		myButton.find("audio")->second->isPressed = false;
 	}
 }
 
 void MainMenu::Render()
 {
-	for (auto button : buttons)
+	for (auto button : myButton)
 	{
 		button.second->Render();
 	}
