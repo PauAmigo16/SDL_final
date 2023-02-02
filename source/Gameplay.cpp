@@ -116,7 +116,6 @@ void Gameplay::Update()
 				food = false;
 
 			states = GameState::DEAD;
-
 		}
 
 		for (auto UI : gameUI)
@@ -127,8 +126,6 @@ void Gameplay::Update()
 		if (endHazardTimer + 4 < TM->GetCurrentTime())
 		{
 			endHazardTimer = TM->GetCurrentTime();
-
-
 
 			fly = false;
 
@@ -170,8 +167,6 @@ void Gameplay::Update()
 		{
 			pos->Update();
 		}
-
-
 
 		for (auto spawns : spawners) {
 			if (spawns->Update())
@@ -266,20 +261,20 @@ void Gameplay::Update()
 			}
 		}
 
-
 		if (!player->IsMoving() && !player->IsDead())
 		{
-
 			bool objectFound = false;
+
 			for (auto object : objects) {
 				if (object->boundingBox.CheckOverlappingAABB(&player->boundingBox))
 				{
-
 					objectFound = true;
+
 					if (object->lethal)
 					{
 						if (player->haveFood())
 							food = false;
+
 						player->Respawn();
 						TM->PauseGame(true);
 						states = GameState::DEAD;
@@ -322,12 +317,9 @@ void Gameplay::Update()
 
 					if (tile->boundingBox.CheckOverlappingAABB(&player->boundingBox))
 					{
-
 						if (tile->lethal)
 						{
 							isWater = dynamic_cast<Tile*>(tile)->IsWater();
-
-
 
 							if (player->haveFood())
 								food = false;
@@ -370,8 +362,6 @@ void Gameplay::Update()
 		}
 		break;
 	case Gameplay::PAUSE:
-
-
 		dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->ComproveButtonCol({ (float)IM->GetMouseX(),(float)IM->GetMouseY() });
 
 		if (dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->ComproveIfButtonPresed("restart"))
@@ -389,7 +379,6 @@ void Gameplay::Update()
 			TM->PauseGame(false);
 			AM->ToggleAudio();
 
-
 			SM->SetScene("mainMenu");
 			states = GameState::GAMEPLAY;
 			dynamic_cast<UIPanel*>(gameUI.find("Pause")->second)->StopPress();
@@ -400,6 +389,7 @@ void Gameplay::Update()
 			dynamic_cast<Score*>(gameUI.find("score")->second)->SetScore(0);
 		}
 		break;
+
 	case Gameplay::DEAD:
 		player->Update();
 
@@ -439,8 +429,8 @@ void Gameplay::Update()
 				dynamic_cast<Score*>(gameUI.find("score")->second)->SetScore(0);
 			}
 		}
-
 		break;
+
 	case Gameplay::MAPEND:
 		if (reachEndTime + 2 < TM->GetCurrentTimeInPause())
 		{
