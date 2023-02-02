@@ -70,12 +70,7 @@ void AudioManager::MuteAudio()
 	assert(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) != -1);
 }
 
-bool AudioManager::IsMuted()
-{
-	return muted;
-}
-
-void AudioManager::SetAudio()
+void AudioManager::ToggleAudio()
 {
 	muted = !muted;
 	if (muted) {

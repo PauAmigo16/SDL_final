@@ -46,13 +46,13 @@ void MainMenu::Update()
 		if (audioIsOn)
 		{
 			myButton.find("audio")->second->SetText("Audio On");
-			AM->SetAudio();
+			AM->ToggleAudio();
 			AM->PlayMusic("MenuMusic");
 		}
 		else
 		{
 			myButton.find("audio")->second->SetText("Audio Off");
-			AM->MuteAudio();
+			AM->ToggleAudio();
 		}
 
 		myButton.find("audio")->second->isPressed = false;

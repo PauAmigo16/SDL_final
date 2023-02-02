@@ -31,5 +31,5 @@ public:
 
 	bool IsMuted();
 
-	void SetAudio();
+	void ToggleAudio();
 };
